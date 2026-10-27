@@ -8,7 +8,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/cases">): 
   const { lang } = await params;
   return {
     title: "Cases",
-    description: "Cases da be-front, powered by Insula e Begen: filmes-mestre e desdobramentos para Unilever, KFC, Maturatta e Natura.",
+    description: "Cases da be-front, powered by Insula e Begen: filmes-mestre e desdobramentos para Unilever, KFC e Maturatta.",
     alternates: hreflang(lang as Locale, "/cases"),
   };
 }
