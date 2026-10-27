@@ -156,6 +156,7 @@ home), `privado` (fora das listas e do sitemap, só por link direto, com `noinde
 - **27/10**: repositório próprio, `InsulaAI/be-front`, separado do InfoMemo (`InsulaAI/projetoframe`), que é confidencial.
 - **27/10**: Next.js 16 + Tailwind 4, como recomendado acima. EN fica para depois: a rota `/en` está prevista em `lib/i18n.ts`, e o seletor do rodapé mostra EN desativado.
 - **27/10**: os clientes que podem aparecer com nome são os do InfoMemo da Insula: Unilever (Brilhante, Clear Men, CIF), KFC, JBS (pela Maturatta) e Natura. Os seis cases da Insula vêm de lá, com os mesmos IDs do YouTube e só os fatos que estão lá.
+- **27/10**: no ar na Vercel em https://be-front-ten.vercel.app/pt, ligado ao `main` deste repositório: cada push publica sozinho.
 - O hero usa a capa do YouTube do Brilhante enquanto não houver loop próprio. Com `heroLoop` preenchido em `site.json`, o loop entra no lugar, com botão de pausa.
 - O bloco do key visual é ilustrativo (formatos e "Mensagem A, B…"), e diz isso na tela. Não mostra números de resultado.
 
