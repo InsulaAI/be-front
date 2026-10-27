@@ -11,7 +11,7 @@ import Numbers from "@/components/Numbers";
 import Reveal from "@/components/Reveal";
 import { SectionHead } from "@/components/Section";
 import { WhatsAppLink } from "@/components/Track";
-import { clientes, empresas, getCase, listedCases, numeros, site, whatsappUrl } from "@/lib/content";
+import { caseImage, clientes, displayBrand, empresas, getCase, listedCases, numeros, site, whatsappUrl } from "@/lib/content";
 import { getDict } from "@/lib/dict";
 import { hreflang, type Locale } from "@/lib/i18n";
 import { ytThumb } from "@/lib/labels";
@@ -33,8 +33,11 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   const hero = getCase(site.heroCase, lang);
   const kv = getCase(site.keyVisualCase, lang);
   const heroImage = site.heroImagem || (hero?.youtubeId ? ytThumb(hero.youtubeId) : "");
-  // Primeiro case de desdobramento da Begen, mostrado junto do bloco do key visual.
-  const begenCase = listedCases(lang).find((c) => c.origem === "begen");
+  // Exemplo real junto do bloco do key visual: o primeiro case com o mosaico do desdobramento
+  // (filme da Insula mais peças da Begen) ou, sem nenhum, o case da Begen.
+  const cases = listedCases(lang);
+  const begenCase = cases.find((c) => c.variacoes.length > 0) ?? cases.find((c) => c.origem === "begen");
+  const begenImage = begenCase ? (begenCase.capa ?? caseImage(begenCase)) : null;
   const wa = whatsappUrl(lang);
   const nums = numeros(lang);
   const { insula, begen } = empresas(lang);
@@ -94,13 +97,13 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                 className="group grid items-center gap-6 rounded-[var(--radius)] border border-line p-4 transition-colors hover:border-line-2 sm:grid-cols-[minmax(0,280px)_1fr_auto] sm:gap-8"
               >
                 <div className="frame aspect-video">
-                  {begenCase.capa && (
-                    <Image src={begenCase.capa} alt="" fill sizes="(min-width: 640px) 280px, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
+                  {begenImage && (
+                    <Image src={begenImage} alt="" fill sizes="(min-width: 640px) 280px, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
                   )}
                 </div>
                 <div className="min-w-0">
                   <p className="eyebrow">
-                    <b>{h.realExample}</b> · {begenCase.produto ?? begenCase.marca}, {h.fromBegen}
+                    <b>{h.realExample}</b> · {displayBrand(begenCase)}
                   </p>
                   <p className="display mt-2 text-[24px] md:text-[28px]">
                     {begenCase.resultados[0] ? (

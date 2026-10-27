@@ -1,7 +1,7 @@
 {
   "slug": "jbs-maturatta",
   "ordem": 4,
-  "origem": "insula",
+  "origem": "be-front",
   "marca": "Maturatta",
   "produto": null,
   "campanha": "Mês do Churrasco",
@@ -18,12 +18,257 @@
   "confidencial": false,
   "privado": false,
   "semAudio": true,
-  "resumo": "Filme master, cortes e versões diárias, em 16:9 e 9:16.",
+  "resumo": "Filme master da Insula e desdobramento da Begen: 90 peças em 5 formatos.",
   "desafio": null,
-  "solucao": "Filme master, cortes e versões diárias da campanha, cada um em 16:9 e em 9:16. Março de 2026.",
+  "solucao": "Filme master, cortes e versões diárias da campanha, cada um em 16:9 e em 9:16. Março de 2026. A partir do filme, a Begen desdobrou a campanha em 6 variações, uma por corte, em 5 formatos de vídeo e display, cada uma estática e animada, mais vídeos de 10 e 15 segundos.",
   "frames": [],
-  "variacoes": [],
-  "resultados": [],
+  "variacoes": [
+    {
+      "src": "/media/cases/jbs-maturatta/v2-1920x1080.mp4",
+      "webm": "/media/cases/jbs-maturatta/v2-1920x1080.webm",
+      "poster": "/media/cases/jbs-maturatta/v2-1920x1080.webp",
+      "formato": "1920x1080",
+      "canal": "Horizontal"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v2-1080x1920.mp4",
+      "webm": "/media/cases/jbs-maturatta/v2-1080x1920.webm",
+      "poster": "/media/cases/jbs-maturatta/v2-1080x1920.webp",
+      "formato": "1080x1920",
+      "canal": "Vertical"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v2-300x600.mp4",
+      "webm": "/media/cases/jbs-maturatta/v2-300x600.webm",
+      "poster": "/media/cases/jbs-maturatta/v2-300x600.webp",
+      "formato": "300x600",
+      "canal": "Display"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v2-970x250.mp4",
+      "webm": "/media/cases/jbs-maturatta/v2-970x250.webm",
+      "poster": "/media/cases/jbs-maturatta/v2-970x250.webp",
+      "formato": "970x250",
+      "canal": "Display"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v2-640x170.mp4",
+      "webm": "/media/cases/jbs-maturatta/v2-640x170.webm",
+      "poster": "/media/cases/jbs-maturatta/v2-640x170.webp",
+      "formato": "640x170",
+      "canal": "Display"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v3-1920x1080.mp4",
+      "webm": "/media/cases/jbs-maturatta/v3-1920x1080.webm",
+      "poster": "/media/cases/jbs-maturatta/v3-1920x1080.webp",
+      "formato": "1920x1080",
+      "canal": "Horizontal"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v3-1080x1920.mp4",
+      "webm": "/media/cases/jbs-maturatta/v3-1080x1920.webm",
+      "poster": "/media/cases/jbs-maturatta/v3-1080x1920.webp",
+      "formato": "1080x1920",
+      "canal": "Vertical"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v3-300x600.mp4",
+      "webm": "/media/cases/jbs-maturatta/v3-300x600.webm",
+      "poster": "/media/cases/jbs-maturatta/v3-300x600.webp",
+      "formato": "300x600",
+      "canal": "Display"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v3-970x250.mp4",
+      "webm": "/media/cases/jbs-maturatta/v3-970x250.webm",
+      "poster": "/media/cases/jbs-maturatta/v3-970x250.webp",
+      "formato": "970x250",
+      "canal": "Display"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v3-640x170.mp4",
+      "webm": "/media/cases/jbs-maturatta/v3-640x170.webm",
+      "poster": "/media/cases/jbs-maturatta/v3-640x170.webp",
+      "formato": "640x170",
+      "canal": "Display"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v4-1920x1080.mp4",
+      "webm": "/media/cases/jbs-maturatta/v4-1920x1080.webm",
+      "poster": "/media/cases/jbs-maturatta/v4-1920x1080.webp",
+      "formato": "1920x1080",
+      "canal": "Horizontal"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v4-1080x1920.mp4",
+      "webm": "/media/cases/jbs-maturatta/v4-1080x1920.webm",
+      "poster": "/media/cases/jbs-maturatta/v4-1080x1920.webp",
+      "formato": "1080x1920",
+      "canal": "Vertical"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v4-300x600.mp4",
+      "webm": "/media/cases/jbs-maturatta/v4-300x600.webm",
+      "poster": "/media/cases/jbs-maturatta/v4-300x600.webp",
+      "formato": "300x600",
+      "canal": "Display"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v4-970x250.mp4",
+      "webm": "/media/cases/jbs-maturatta/v4-970x250.webm",
+      "poster": "/media/cases/jbs-maturatta/v4-970x250.webp",
+      "formato": "970x250",
+      "canal": "Display"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v4-640x170.mp4",
+      "webm": "/media/cases/jbs-maturatta/v4-640x170.webm",
+      "poster": "/media/cases/jbs-maturatta/v4-640x170.webp",
+      "formato": "640x170",
+      "canal": "Display"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v5-1920x1080.mp4",
+      "webm": "/media/cases/jbs-maturatta/v5-1920x1080.webm",
+      "poster": "/media/cases/jbs-maturatta/v5-1920x1080.webp",
+      "formato": "1920x1080",
+      "canal": "Horizontal"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v5-1080x1920.mp4",
+      "webm": "/media/cases/jbs-maturatta/v5-1080x1920.webm",
+      "poster": "/media/cases/jbs-maturatta/v5-1080x1920.webp",
+      "formato": "1080x1920",
+      "canal": "Vertical"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v5-300x600.mp4",
+      "webm": "/media/cases/jbs-maturatta/v5-300x600.webm",
+      "poster": "/media/cases/jbs-maturatta/v5-300x600.webp",
+      "formato": "300x600",
+      "canal": "Display"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v5-970x250.mp4",
+      "webm": "/media/cases/jbs-maturatta/v5-970x250.webm",
+      "poster": "/media/cases/jbs-maturatta/v5-970x250.webp",
+      "formato": "970x250",
+      "canal": "Display"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v5-640x170.mp4",
+      "webm": "/media/cases/jbs-maturatta/v5-640x170.webm",
+      "poster": "/media/cases/jbs-maturatta/v5-640x170.webp",
+      "formato": "640x170",
+      "canal": "Display"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v6-1920x1080.mp4",
+      "webm": "/media/cases/jbs-maturatta/v6-1920x1080.webm",
+      "poster": "/media/cases/jbs-maturatta/v6-1920x1080.webp",
+      "formato": "1920x1080",
+      "canal": "Horizontal"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v6-1080x1920.mp4",
+      "webm": "/media/cases/jbs-maturatta/v6-1080x1920.webm",
+      "poster": "/media/cases/jbs-maturatta/v6-1080x1920.webp",
+      "formato": "1080x1920",
+      "canal": "Vertical"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v6-300x600.mp4",
+      "webm": "/media/cases/jbs-maturatta/v6-300x600.webm",
+      "poster": "/media/cases/jbs-maturatta/v6-300x600.webp",
+      "formato": "300x600",
+      "canal": "Display"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v6-970x250.mp4",
+      "webm": "/media/cases/jbs-maturatta/v6-970x250.webm",
+      "poster": "/media/cases/jbs-maturatta/v6-970x250.webp",
+      "formato": "970x250",
+      "canal": "Display"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v6-640x170.mp4",
+      "webm": "/media/cases/jbs-maturatta/v6-640x170.webm",
+      "poster": "/media/cases/jbs-maturatta/v6-640x170.webp",
+      "formato": "640x170",
+      "canal": "Display"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v7-1920x1080.mp4",
+      "webm": "/media/cases/jbs-maturatta/v7-1920x1080.webm",
+      "poster": "/media/cases/jbs-maturatta/v7-1920x1080.webp",
+      "formato": "1920x1080",
+      "canal": "Horizontal"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v7-1080x1920.mp4",
+      "webm": "/media/cases/jbs-maturatta/v7-1080x1920.webm",
+      "poster": "/media/cases/jbs-maturatta/v7-1080x1920.webp",
+      "formato": "1080x1920",
+      "canal": "Vertical"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v7-300x600.mp4",
+      "webm": "/media/cases/jbs-maturatta/v7-300x600.webm",
+      "poster": "/media/cases/jbs-maturatta/v7-300x600.webp",
+      "formato": "300x600",
+      "canal": "Display"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v7-970x250.mp4",
+      "webm": "/media/cases/jbs-maturatta/v7-970x250.webm",
+      "poster": "/media/cases/jbs-maturatta/v7-970x250.webp",
+      "formato": "970x250",
+      "canal": "Display"
+    },
+    {
+      "src": "/media/cases/jbs-maturatta/v7-640x170.mp4",
+      "webm": "/media/cases/jbs-maturatta/v7-640x170.webm",
+      "poster": "/media/cases/jbs-maturatta/v7-640x170.webp",
+      "formato": "640x170",
+      "canal": "Display"
+    }
+  ],
+  "resultados": [
+    {
+      "valor": "90",
+      "rotulo": "peças no desdobramento",
+      "fonte": "Begen, arquivos do desdobramento",
+      "periodo": "campanha Mês do Churrasco",
+      "en": {
+        "rotulo": "assets in the rollout",
+        "fonte": "Begen, rollout files",
+        "periodo": "Barbecue Month campaign"
+      }
+    },
+    {
+      "valor": "6",
+      "rotulo": "variações, uma por corte",
+      "fonte": "Begen, arquivos do desdobramento",
+      "periodo": "campanha Mês do Churrasco",
+      "en": {
+        "rotulo": "variations, one per cut",
+        "fonte": "Begen, rollout files",
+        "periodo": "Barbecue Month campaign"
+      }
+    },
+    {
+      "valor": "5",
+      "rotulo": "formatos, de 640×170 a 1920×1080",
+      "fonte": "Begen, arquivos do desdobramento",
+      "periodo": "campanha Mês do Churrasco",
+      "en": {
+        "rotulo": "formats, from 640×170 to 1920×1080",
+        "fonte": "Begen, rollout files",
+        "periodo": "Barbecue Month campaign"
+      }
+    }
+  ],
   "creditos": {
     "insula": [],
     "begen": [],
@@ -37,7 +282,10 @@
   "en": {
     "campanha": "Barbecue Month",
     "setor": "food",
-    "resumo": "Master film, cutdowns and daily versions, in 16:9 and 9:16.",
-    "solucao": "Master film, cutdowns and daily campaign versions, each in 16:9 and 9:16. March 2026."
-  }
+    "resumo": "Insula's master film and Begen's rollout: 90 assets in 5 formats.",
+    "solucao": "Master film, cutdowns and daily campaign versions, each in 16:9 and 9:16. March 2026. From the film, Begen rolled the campaign out into 6 variations, one per cut, across 5 video and display formats, each static and animated, plus 10 and 15-second videos.",
+    "escalaNota": "The mosaic shows the 30 animated versions. The full rollout has 90 assets: static, animated and video."
+  },
+  "capa": "/media/cases/jbs-maturatta/v7-1920x1080.webp",
+  "escalaNota": "O mosaico mostra as 30 versões animadas. O desdobramento completo tem 90 peças: estáticas, animadas e vídeos."
 }

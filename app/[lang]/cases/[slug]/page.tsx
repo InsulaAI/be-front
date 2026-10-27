@@ -130,6 +130,7 @@ export default async function CasePage({ params }: PageProps<"/[lang]/cases/[slu
           <h2 id="escala" className="display mt-4 text-[clamp(32px,4vw,52px)]">
             {c.variacoes.length} {cp.scaleTitle}
           </h2>
+          {c.escalaNota && <p className="lede mt-4">{c.escalaNota}</p>}
           <div className="mt-10">
             <ScaleMosaic lang={lang} items={c.variacoes} />
           </div>

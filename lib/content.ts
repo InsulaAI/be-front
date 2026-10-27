@@ -11,7 +11,8 @@ import { ytThumb } from "./labels";
 export type Entrega = "filme" | "desdobramento";
 export type Tipo = "ia" | "hibrido" | "captacao";
 
-export type Variacao = { src: string | null; poster?: string; formato: string; canal: string };
+/** Uma peça do desdobramento: loop curto (mp4, com webm opcional) e a capa, no formato e canal dela. */
+export type Variacao = { src: string | null; webm?: string; poster?: string; formato: string; canal: string };
 /** Imagem ou loop curto (mp4, com webm e poster opcionais) da solução ou do making of. */
 export type Frame = string | { src: string; webm?: string; poster?: string; legenda?: string };
 export type Resultado = { valor: string; rotulo: string; fonte: string; periodo: string };
@@ -41,6 +42,8 @@ export type Case = {
   solucao: string | null;
   frames: Frame[];
   variacoes: Variacao[];
+  /** Observação sobre o mosaico, quando ele mostra só parte do desdobramento. */
+  escalaNota?: string | null;
   resultados: Resultado[];
   creditos: { insula: string[]; begen: string[]; agencia: string[]; cliente: string[] };
 };
