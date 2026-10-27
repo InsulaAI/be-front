@@ -165,7 +165,7 @@ home), `privado` (fora das listas e do sitemap, só por link direto, com `noinde
 - Quais cases entram no lançamento e quais clientes autorizam aparecer com nome.
 - Demonstração ao vivo do AdMultify ou apenas o bloco ilustrativo.
 - Logo final (o atual foi vetorizado da imagem enviada em 27/10).
-- Endereços dos sites da Insula e da Begen, e os cases da Begen.
+- Os cases da Begen. Sites: Insula em https://insula-ai.com/ e Begen em https://begen.ai/ (já ligados em `content/site.json`).
 - E-mail, WhatsApp, agenda e redes (`content/site.json`).
 - Técnica (IA ou híbrido) e agência dos cases da Insula que não trazem esse dado.
 - Os filmes estão como "não listados" no YouTube. Confirmar que cada cliente liberou a exibição pública; senão, marcar `privado: true`.

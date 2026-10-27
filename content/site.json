@@ -14,13 +14,13 @@
   "empresas": {
     "insula": {
       "nome": "Insula",
-      "site": "",
+      "site": "https://insula-ai.com/",
       "parte": "Filme-mestre",
       "texto": "Label de filmes publicitários com IA e híbridos (captação real mais IA), criado por Luciano Mathias e Caíto Cyrillo. Faz o filme-mestre: roteiro, direção, geração e finalização, com linguagem de cinema. Do roteiro ao filme final em cerca de 18 dias."
     },
     "begen": {
       "nome": "Begen",
-      "site": "",
+      "site": "https://begen.ai/",
       "parte": "Desdobramento",
       "texto": "Criadora do AdMultify, que transforma o key visual de uma campanha em centenas de variações de formato e mensagem, prontas para cada canal."
     }
