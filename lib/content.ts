@@ -4,11 +4,14 @@ import clientesJson from "@/content/clientes.json";
 import filmesJson from "@/content/filmes.json";
 import numerosJson from "@/content/numeros.json";
 import siteJson from "@/content/site.json";
+import { ytThumb } from "./labels";
 
 export type Entrega = "filme" | "desdobramento";
 export type Tipo = "ia" | "hibrido" | "captacao";
 
 export type Variacao = { src: string | null; poster?: string; formato: string; canal: string };
+/** Imagem ou loop curto (mp4, com webm e poster opcionais) da solução ou do making of. */
+export type Frame = string | { src: string; webm?: string; poster?: string; legenda?: string };
 export type Resultado = { valor: string; rotulo: string; fonte: string; periodo: string };
 
 export type Case = {
@@ -25,6 +28,8 @@ export type Case = {
   tipo: Tipo | null;
   entrega: Entrega[];
   youtubeId: string | null;
+  /** Imagem do case quando não há filme no YouTube (ex.: cases de desdobramento da Begen). */
+  capa?: string | null;
   destaque: boolean;
   confidencial: boolean;
   privado: boolean;
@@ -32,7 +37,7 @@ export type Case = {
   resumo: string;
   desafio: string | null;
   solucao: string | null;
-  frames: string[];
+  frames: Frame[];
   variacoes: Variacao[];
   resultados: Resultado[];
   creditos: { insula: string[]; begen: string[]; agencia: string[]; cliente: string[] };
@@ -89,6 +94,11 @@ export function displayBrand(c: Case): string {
   return c.produto ? `${c.produto} · ${c.marca}` : c.marca;
 }
 
+/** Imagem que representa o case: a capa do filme no YouTube ou, sem filme, a capa própria. */
+export function caseImage(c: Case): string | null {
+  return c.youtubeId ? ytThumb(c.youtubeId) : (c.capa ?? null);
+}
+
 /** Galeria: filmes dos cases (com selo "com case") mais os filmes sem case. */
 export function allFilms(): Filme[] {
   const fromCases: Filme[] = listedCases()
@@ -120,6 +130,8 @@ export const numeros = numerosJson.numeros as Numero[];
 export type Empresa = { nome: string; site: string; parte: string; texto: string };
 export const site = siteJson as {
   heroCase: string;
+  /** Frame próprio para o hero e o key visual (ex.: /media/hero/kfc.webp). Vazio: usa a capa do YouTube do heroCase. */
+  heroImagem: string;
   /** object-position do frame nos recortes (hero e key visual), para o rosto não sair do quadro */
   heroFoco: string;
   heroLoop: { mp4: string; webm: string; poster: string };

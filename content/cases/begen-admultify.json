@@ -1,0 +1,74 @@
+{
+  "slug": "begen-admultify",
+  "ordem": 5.5,
+  "origem": "begen",
+  "marca": "Begen",
+  "produto": "AdMultify",
+  "campanha": "Demonstração: Campaign rollout at a glance",
+  "agencia": null,
+  "ano": 2025,
+  "setor": "tecnologia",
+  "tipo": null,
+  "entrega": [
+    "desdobramento"
+  ],
+  "youtubeId": null,
+  "capa": "/media/cases/begen-admultify/capa.webp",
+  "destaque": false,
+  "confidencial": false,
+  "privado": false,
+  "resumo": "Um key visual de demonstração desdobrado pelo AdMultify em 114 anúncios.",
+  "desafio": "Desdobrar uma campanha em todos os formatos é lento, repetitivo e manual. Cada peça nova é o mesmo trabalho refeito à mão.",
+  "solucao": "O AdMultify recebe o key visual (imagens, fontes e dados), mapeia a posição e as variações de cada elemento, mostra as prévias para revisão e gera todas as variações de uma vez. Material de demonstração publicado pela Begen.",
+  "frames": [
+    {
+      "src": "/media/cases/begen-admultify/key-visual.webp",
+      "legenda": "Key visual e as primeiras variações"
+    },
+    {
+      "src": "/media/cases/begen-admultify/editor.webp",
+      "legenda": "Mapeamento dos elementos na plataforma"
+    },
+    {
+      "src": "/media/cases/begen-admultify/previas.webp",
+      "legenda": "Prévias para revisão"
+    },
+    {
+      "src": "/media/cases/begen-admultify/gerados.webp",
+      "legenda": "114 anúncios gerados"
+    },
+    {
+      "src": "/media/cases/begen-admultify/resize.mp4",
+      "webm": "/media/cases/begen-admultify/resize.webm",
+      "poster": "/media/cases/begen-admultify/resize-poster.webp",
+      "legenda": "Redimensionar para os formatos de display"
+    },
+    {
+      "src": "/media/cases/begen-admultify/amplify.mp4",
+      "webm": "/media/cases/begen-admultify/amplify.webm",
+      "poster": "/media/cases/begen-admultify/amplify-poster.webp",
+      "legenda": "Variar a mensagem"
+    },
+    {
+      "src": "/media/cases/begen-admultify/variety.mp4",
+      "webm": "/media/cases/begen-admultify/variety.webm",
+      "poster": "/media/cases/begen-admultify/variety-poster.webp",
+      "legenda": "Ampliar o alcance"
+    }
+  ],
+  "variacoes": [],
+  "resultados": [
+    {
+      "valor": "114",
+      "rotulo": "anúncios gerados a partir de um key visual",
+      "fonte": "Begen, demonstração do AdMultify",
+      "periodo": "begen.ai, 2025"
+    }
+  ],
+  "creditos": {
+    "insula": [],
+    "begen": [],
+    "agencia": [],
+    "cliente": []
+  }
+}

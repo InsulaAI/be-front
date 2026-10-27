@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import BriefingForm from "@/components/BriefingForm";
 import CaseCard from "@/components/CaseCard";
@@ -27,6 +28,9 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   const destaques = listedCases().filter((c) => c.destaque).slice(0, 4);
   const hero = getCase(site.heroCase);
   const kv = getCase(site.keyVisualCase);
+  const heroImage = site.heroImagem || (hero?.youtubeId ? ytThumb(hero.youtubeId) : "");
+  // Primeiro case de desdobramento da Begen, mostrado junto do bloco do key visual.
+  const begenCase = listedCases().find((c) => c.origem === "begen");
   const wa = whatsappUrl();
   const { insula, begen } = site.empresas;
 
@@ -36,7 +40,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         lang={lang}
         title="Um filme. Todos os formatos."
         intro="Do conceito cinematográfico à entrega em cada canal, em um fluxo só: a Insula faz o filme-mestre e a Begen o transforma em centenas de peças."
-        media={{ image: hero?.youtubeId ? ytThumb(hero.youtubeId) : "", focus: site.heroFoco, loop: site.heroLoop }}
+        media={{ image: heroImage, focus: site.heroFoco, loop: site.heroLoop }}
       />
 
       {/* 2. Método */}
@@ -78,8 +82,39 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             O mesmo quadro, recortado para cada formato e reescrito para cada mensagem.
           </SectionHead>
           <Reveal>
-            <KeyVisual image={ytThumb(kv.youtubeId)} focus={site.heroFoco} />
+            <KeyVisual image={site.heroImagem && kv.slug === hero?.slug ? site.heroImagem : ytThumb(kv.youtubeId)} focus={site.heroFoco} />
           </Reveal>
+          {begenCase && (
+            <Reveal className="mt-10">
+              <Link
+                href={`/${lang}/cases/${begenCase.slug}`}
+                className="group grid items-center gap-6 rounded-[var(--radius)] border border-line p-4 transition-colors hover:border-line-2 sm:grid-cols-[minmax(0,280px)_1fr_auto] sm:gap-8"
+              >
+                <div className="frame aspect-video">
+                  {begenCase.capa && (
+                    <Image src={begenCase.capa} alt="" fill sizes="(min-width: 640px) 280px, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
+                  )}
+                </div>
+                <div className="min-w-0">
+                  <p className="eyebrow">
+                    <b>Exemplo real</b> · {begenCase.produto ?? begenCase.marca}, da Begen
+                  </p>
+                  <p className="display mt-2 text-[24px] md:text-[28px]">
+                    {begenCase.resultados[0] ? (
+                      <>
+                        <span className="text-accent">{begenCase.resultados[0].valor}</span> {begenCase.resultados[0].rotulo}
+                      </>
+                    ) : (
+                      begenCase.campanha
+                    )}
+                  </p>
+                </div>
+                <span aria-hidden className="grid h-11 w-11 place-items-center rounded-full border border-line-2 transition-colors group-hover:border-accent group-hover:bg-accent group-hover:text-accent-ink">
+                  →
+                </span>
+              </Link>
+            </Reveal>
+          )}
         </section>
       )}
 

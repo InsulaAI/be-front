@@ -1,7 +1,8 @@
 {
   "_leia": "Contatos e textos fixos. Campo vazio esconde o item no site (WhatsApp, agenda, e-mail, redes, links das empresas).",
   "heroCase": "kfc",
-  "heroFoco": "62% 35%",
+  "heroImagem": "/media/hero/kfc-coronel.webp",
+  "heroFoco": "53% 30%",
   "heroLoop": {
     "mp4": "",
     "webm": "",

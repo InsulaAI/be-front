@@ -3,12 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import CaseCard from "@/components/CaseCard";
+import CaseMedia from "@/components/CaseMedia";
 import { JsonLd, videoObject } from "@/components/JsonLd";
 import Reveal from "@/components/Reveal";
 import ScaleMosaic from "@/components/ScaleMosaic";
 import { TrackView } from "@/components/Track";
 import YouTube from "@/components/YouTube";
-import { allCases, displayBrand, getCase, nextCase, type Case } from "@/lib/content";
+import { allCases, caseImage, displayBrand, getCase, nextCase, type Case } from "@/lib/content";
 import { hreflang, type Locale } from "@/lib/i18n";
 import { TIPO_LABEL, entregaLabel, ytThumb } from "@/lib/labels";
 
@@ -30,7 +31,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/cases/[slu
     description: `${c.resumo} be-front, powered by Insula e Begen.`,
     alternates: hreflang(lang as Locale, `/cases/${slug}`),
     robots: c.privado || c.rascunho ? { index: false, follow: false } : undefined,
-    openGraph: c.youtubeId ? { images: [ytThumb(c.youtubeId)] } : undefined,
+    openGraph: caseImage(c) ? { images: [caseImage(c)!] } : undefined,
   };
 }
 
@@ -77,10 +78,18 @@ export default async function CasePage({ params }: PageProps<"/[lang]/cases/[slu
         </Reveal>
       </header>
 
-      {c.youtubeId && (
+      {c.youtubeId ? (
         <Reveal className="wrap mt-14 md:mt-20">
           <YouTube id={c.youtubeId} title={titleOf(c)} priority caption={c.semAudio ? "Filme-mestre · sem áudio" : "Filme-mestre"} />
         </Reveal>
+      ) : (
+        c.capa && (
+          <Reveal className="wrap mt-14 md:mt-20">
+            <div className="frame aspect-[16/8]">
+              <Image src={c.capa} alt={`${brand}: ${c.campanha}`} fill priority sizes="(min-width: 1240px) 1160px, 100vw" className="object-cover" />
+            </div>
+          </Reveal>
+        )
       )}
 
       <div className="wrap mt-20 grid gap-16 md:mt-28 md:grid-cols-2 md:gap-12">
@@ -103,13 +112,9 @@ export default async function CasePage({ params }: PageProps<"/[lang]/cases/[slu
       </div>
 
       {c.frames.length > 0 && (
-        <div className="wrap mt-12 grid grid-cols-2 gap-3 md:grid-cols-4">
-          {c.frames.map((src, i) => (
-            <div key={src} className="frame aspect-[4/5]">
-              <Image src={src} alt={`Making of ${i + 1}`} fill sizes="(min-width: 768px) 25vw, 50vw" />
-            </div>
-          ))}
-        </div>
+        <Reveal className="wrap mt-12">
+          <CaseMedia frames={c.frames} />
+        </Reveal>
       )}
 
       {c.variacoes.length > 0 && (
