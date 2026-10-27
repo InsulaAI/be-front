@@ -161,7 +161,7 @@ home), `privado` (fora das listas e do sitemap, só por link direto, com `noinde
 
 ## Decisões em aberto (pergunte antes de assumir)
 
-- Domínio definitivo da be-front.
+- Domínio definitivo da be-front. Até lá, o site fica no endereço genérico da Vercel (decisão de 27/10), que `lib/i18n.ts` pega sozinho de `VERCEL_PROJECT_PRODUCTION_URL`.
 - Quais cases entram no lançamento e quais clientes autorizam aparecer com nome.
 - Demonstração ao vivo do AdMultify ou apenas o bloco ilustrativo.
 - Logo final (o atual foi vetorizado da imagem enviada em 27/10).

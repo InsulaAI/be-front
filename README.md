@@ -25,4 +25,4 @@ Sem `NEXT_PUBLIC_GA_ID`, nenhum script de métricas é carregado.
 
 ## Deploy
 
-Vercel: importar o repositório e configurar as variáveis de `.env.example`. `NEXT_PUBLIC_SITE_URL` precisa do domínio final para canonical, hreflang e sitemap.
+Vercel: importar o repositório e configurar as variáveis de `.env.example`. Sem `NEXT_PUBLIC_SITE_URL`, o site usa o endereço genérico da Vercel (`*.vercel.app`); preencher quando houver domínio próprio.

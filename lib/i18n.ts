@@ -8,7 +8,10 @@ export function isLocale(v: string): v is Locale {
   return (LOCALES as readonly string[]).includes(v);
 }
 
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+// Domínio próprio quando houver; até lá, o endereço genérico que a Vercel dá ao projeto.
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000");
 
 export const NAV = [
   { href: "/filmes", label: "Filmes" },
