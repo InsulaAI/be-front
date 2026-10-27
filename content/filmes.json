@@ -13,7 +13,11 @@
         "filme"
       ],
       "descricao": "Produção própria da Insula, sem cliente nem agência.",
-      "privado": false
+      "privado": false,
+      "en": {
+        "titulo": "Original project",
+        "descricao": "Insula's own production, with no client or agency."
+      }
     }
   ]
 }

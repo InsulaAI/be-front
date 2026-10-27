@@ -3,9 +3,11 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import type { Frame } from "@/lib/content";
+import { getDict } from "@/lib/dict";
 
 /** Frames da solução: imagem ou loop curto sem som, com botão de pausa. */
-export default function CaseMedia({ frames }: { frames: Frame[] }) {
+export default function CaseMedia({ lang, frames }: { lang: string; frames: Frame[] }) {
+  const t = getDict(lang);
   return (
     <div className="columns-1 gap-4 sm:columns-2">
       {frames.map((f, i) => {
@@ -14,11 +16,11 @@ export default function CaseMedia({ frames }: { frames: Frame[] }) {
           <figure key={item.src} className="mb-4 break-inside-avoid">
             <div className="frame">
               {item.src.endsWith(".mp4") ? (
-                <Loop src={item.src} webm={item.webm} poster={item.poster} label={item.legenda ?? `Making of ${i + 1}`} />
+                <Loop src={item.src} webm={item.webm} poster={item.poster} label={item.legenda ?? `${t.casePage.makingOf} ${i + 1}`} play={t.loop.play} pause={t.loop.pause} />
               ) : (
                 <Image
                   src={item.src}
-                  alt={item.legenda ?? `Making of ${i + 1}`}
+                  alt={item.legenda ?? `${t.casePage.makingOf} ${i + 1}`}
                   width={1600}
                   height={900}
                   sizes="(min-width: 640px) 50vw, 100vw"
@@ -34,7 +36,7 @@ export default function CaseMedia({ frames }: { frames: Frame[] }) {
   );
 }
 
-function Loop({ src, webm, poster, label }: { src: string; webm?: string; poster?: string; label: string }) {
+function Loop({ src, webm, poster, label, play, pause }: { src: string; webm?: string; poster?: string; label: string; play: string; pause: string }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [paused, setPaused] = useState(true);
 
@@ -76,7 +78,7 @@ function Loop({ src, webm, poster, label }: { src: string; webm?: string; poster
         aria-pressed={paused}
         className="eyebrow absolute bottom-3 right-3 rounded-full border border-line-2 bg-ground/70 px-3 py-1.5 !text-text-2 backdrop-blur hover:!text-text"
       >
-        {paused ? "▶ Tocar" : "❚❚ Pausar"}
+        {paused ? play : pause}
       </button>
     </>
   );

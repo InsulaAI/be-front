@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getDict } from "@/lib/dict";
 
 // Envio do briefing por e-mail (Resend). Anti-spam: campo-armadilha, tempo mínimo de preenchimento
 // e limite simples por IP. Sem RESEND_API_KEY, o briefing só vai para o log (útil em desenvolvimento).
@@ -20,10 +21,11 @@ const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&l
 
 export async function POST(req: Request) {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "local";
-  if (rateLimited(ip)) return NextResponse.json({ error: "Muitos envios seguidos. Tente de novo em alguns minutos." }, { status: 429 });
-
   const body = await req.json().catch(() => null);
-  if (!body) return NextResponse.json({ error: "Envio inválido." }, { status: 400 });
+  // Mensagens de erro no idioma da página que enviou.
+  const t = getDict(body?.lang ?? "pt").form;
+  if (rateLimited(ip)) return NextResponse.json({ error: t.errRate }, { status: 429 });
+  if (!body) return NextResponse.json({ error: t.errInvalid }, { status: 400 });
 
   // Robô: preencheu o campo invisível ou enviou rápido demais. Responde OK e descarta.
   if (clean(body.site, 200) || Number(body.elapsed) < 2500) return NextResponse.json({ ok: true });
@@ -35,9 +37,10 @@ export async function POST(req: Request) {
     perfil: clean(body.perfil, 40),
     entrega: clean(body.entrega, 60),
     mensagem: clean(body.mensagem, 5000),
+    idioma: clean(body.lang, 5),
   };
   if (!data.nome || !data.empresa || !data.mensagem || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
-    return NextResponse.json({ error: "Preencha nome, empresa, um e-mail válido e a mensagem." }, { status: 400 });
+    return NextResponse.json({ error: t.errFields }, { status: 400 });
   }
 
   const key = process.env.RESEND_API_KEY;
@@ -64,7 +67,7 @@ export async function POST(req: Request) {
   });
   if (!res.ok) {
     console.error("[briefing] Resend respondeu", res.status, await res.text());
-    return NextResponse.json({ error: "Não foi possível enviar agora. Tente o WhatsApp ou de novo em instantes." }, { status: 502 });
+    return NextResponse.json({ error: t.errSend }, { status: 502 });
   }
   return NextResponse.json({ ok: true });
 }

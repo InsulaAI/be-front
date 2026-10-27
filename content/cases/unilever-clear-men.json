@@ -30,5 +30,11 @@
     "cliente": [
       "Unilever"
     ]
+  },
+  "en": {
+    "campanha": "Clear Men with Vini Jr.",
+    "setor": "personal care",
+    "resumo": "One film, many versions and formats.",
+    "solucao": "Delivered as a director's cut, YouTube and TV versions, adaptations and upscales."
   }
 }

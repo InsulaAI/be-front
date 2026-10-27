@@ -17,7 +17,8 @@ Sem `NEXT_PUBLIC_GA_ID`, nenhum script de métricas é carregado.
 
 ## Editar conteúdo
 
-- **Case novo**: copiar um arquivo de `content/cases/` e trocar os campos. `ordem` define a posição; `destaque: true` coloca na home.
+- **Case novo**: copiar um arquivo de `content/cases/` e trocar os campos. `ordem` define a posição; `destaque: true` coloca na home. A versão em inglês vai no campo `"en"` (veja os cases existentes).
+- **Textos da interface** (menus, botões, títulos): `lib/dict.ts`, em PT e EN.
 - **Filme sem case**: `content/filmes.json`.
 - **Logo de cliente**: `content/clientes.json`, só cliente autorizado. SVG de uma cor, `fill` em `currentColor`.
 - **Números da home**: `content/numeros.json`. Só número com fonte.

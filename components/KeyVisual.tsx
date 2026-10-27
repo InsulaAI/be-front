@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useId, useMemo, useState } from "react";
+import { getDict } from "@/lib/dict";
 
 // Formatos e mensagens de exemplo, só para ilustrar o desdobramento.
 const FORMATS = [
@@ -18,12 +19,13 @@ const FORMATS = [
   { r: "320 / 100", f: "320×100", c: "Mobile" },
   { r: "4 / 5", f: "4:5", c: "Pinterest" },
 ];
-const MESSAGES = ["Mensagem A", "Mensagem B", "Mensagem C", "Mensagem D", "Mensagem E", "Mensagem F"];
+const MESSAGES = ["A", "B", "C", "D", "E", "F"];
 // Pequenas variações de recorte em torno do foco do frame.
 const JITTER = [[0, 0], [-8, 4], [6, -4], [-4, -6], [8, 6], [-10, 0], [4, 8]];
 const MAX = 120;
 
-export default function KeyVisual({ image, focus = "50% 50%" }: { image: string; focus?: string }) {
+export default function KeyVisual({ lang, image, focus = "50% 50%" }: { lang: string; image: string; focus?: string }) {
+  const t = getDict(lang).kv;
   const [fx, fy] = focus.split(" ").map((v) => parseFloat(v));
   const [n, setN] = useState(1);
   const id = useId();
@@ -52,13 +54,12 @@ export default function KeyVisual({ image, focus = "50% 50%" }: { image: string;
             {n}
           </p>
           <p className="mt-2 text-text-2">
-            {n === 1 ? "key visual" : "peças"} · {formats} {formats === 1 ? "formato" : "formatos"} · {messages}{" "}
-            {messages === 1 ? "mensagem" : "mensagens"}
+            {n === 1 ? t.keyVisual : t.pieces} · {formats} {t.format[formats === 1 ? 0 : 1]} · {messages} {t.message[messages === 1 ? 0 : 1]}
           </p>
         </div>
         <div>
           <label htmlFor={id} className="eyebrow mb-4 block">
-            Arraste para desdobrar
+            {t.drag}
           </label>
           <input
             id={id}
@@ -68,13 +69,13 @@ export default function KeyVisual({ image, focus = "50% 50%" }: { image: string;
             value={n}
             onChange={(e) => setN(Number(e.target.value))}
             className="kv-range w-full"
-            aria-valuetext={`${n} peças`}
+            aria-valuetext={`${n} ${t.pieces}`}
           />
           <div className="eyebrow mt-3 flex justify-between">
             <span>1</span>
             <span>{MAX}</span>
           </div>
-          <p className="mt-6 text-sm text-text-3">Ilustrativo. Os números de cada campanha estão nas páginas de case.</p>
+          <p className="mt-6 text-sm text-text-3">{t.note}</p>
         </div>
       </div>
 
@@ -97,7 +98,7 @@ export default function KeyVisual({ image, focus = "50% 50%" }: { image: string;
               {cols <= 6 && (
                 <span className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-2 bg-gradient-to-t from-black/80 to-transparent px-2 pb-1.5 pt-4 font-mono text-[9px] uppercase tracking-wider text-text-2">
                   <span className="truncate">{p.f} · {p.c}</span>
-                  {n > 1 && <span className="hidden truncate text-accent sm:inline">{p.m}</span>}
+                  {n > 1 && <span className="hidden truncate text-accent sm:inline">{t.messageLabel} {p.m}</span>}
                 </span>
               )}
             </div>

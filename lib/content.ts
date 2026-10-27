@@ -4,6 +4,8 @@ import clientesJson from "@/content/clientes.json";
 import filmesJson from "@/content/filmes.json";
 import numerosJson from "@/content/numeros.json";
 import siteJson from "@/content/site.json";
+import { getDict } from "./dict";
+import type { Locale } from "./i18n";
 import { ytThumb } from "./labels";
 
 export type Entrega = "filme" | "desdobramento";
@@ -61,28 +63,43 @@ export type Filme = {
 const CASES_DIR = path.join(process.cwd(), "content", "cases");
 const isDev = process.env.NODE_ENV !== "production";
 
+/**
+ * Versão do conteúdo no idioma pedido. Qualquer objeto do content/ pode ter um campo "en" com os
+ * textos em inglês (no case, num resultado, numa legenda); em /en eles substituem os em português.
+ * Campo que não tem versão em inglês fica em português.
+ */
+export function localize<T>(value: T, lang: Locale): T {
+  if (Array.isArray(value)) return value.map((v) => localize(v, lang)) as T;
+  if (value && typeof value === "object") {
+    const { en, ...rest } = value as Record<string, unknown>;
+    const merged: Record<string, unknown> = lang === "en" && en && typeof en === "object" ? { ...rest, ...(en as object) } : rest;
+    return Object.fromEntries(Object.entries(merged).map(([k, v]) => [k, localize(v, lang)])) as T;
+  }
+  return value;
+}
+
 /** Todos os cases, inclusive os privados (acessíveis só por link). Rascunhos só em desenvolvimento. */
-export function allCases(): Case[] {
+export function allCases(lang: Locale = "pt"): Case[] {
   return fs
     .readdirSync(CASES_DIR)
     .filter((f) => f.endsWith(".json"))
-    .map((f) => JSON.parse(fs.readFileSync(path.join(CASES_DIR, f), "utf8")) as Case)
+    .map((f) => localize(JSON.parse(fs.readFileSync(path.join(CASES_DIR, f), "utf8")) as Case, lang))
     .filter((c) => isDev || !c.rascunho)
     .sort((a, b) => a.ordem - b.ordem);
 }
 
 /** Cases que aparecem em listas e destaques. */
-export function listedCases(): Case[] {
-  return allCases().filter((c) => !c.privado);
+export function listedCases(lang: Locale = "pt"): Case[] {
+  return allCases(lang).filter((c) => !c.privado);
 }
 
-export function getCase(slug: string): Case | undefined {
-  return allCases().find((c) => c.slug === slug);
+export function getCase(slug: string, lang: Locale = "pt"): Case | undefined {
+  return allCases(lang).find((c) => c.slug === slug);
 }
 
 /** O case seguinte na lista pública, voltando ao primeiro no fim. */
-export function nextCase(slug: string): Case | undefined {
-  const list = listedCases();
+export function nextCase(slug: string, lang: Locale = "pt"): Case | undefined {
+  const list = listedCases(lang);
   if (list.length < 2) return undefined;
   const i = list.findIndex((c) => c.slug === slug);
   return list[(i + 1) % list.length];
@@ -100,12 +117,12 @@ export function caseImage(c: Case): string | null {
 }
 
 /** Galeria: filmes dos cases (com selo "com case") mais os filmes sem case. */
-export function allFilms(): Filme[] {
-  const fromCases: Filme[] = listedCases()
+export function allFilms(lang: Locale = "pt"): Filme[] {
+  const fromCases: Filme[] = listedCases(lang)
     .filter((c) => c.youtubeId)
     .map((c) => ({
       youtubeId: c.youtubeId!,
-      titulo: c.confidencial ? `${displayBrand(c)} · sob consulta` : c.campanha,
+      titulo: c.confidencial ? `${displayBrand(c)} · ${getDict(lang).gallery.underRequest}` : c.campanha,
       categoria: "publicidade",
       origem: c.origem,
       ano: c.ano,
@@ -117,7 +134,7 @@ export function allFilms(): Filme[] {
       caseSlug: c.slug,
       semAudio: c.semAudio,
     }));
-  const avulsos = (filmesJson.filmes as Filme[]).filter((f) => !f.privado);
+  const avulsos = localize(filmesJson.filmes as Filme[], lang).filter((f) => !f.privado);
   return [...fromCases, ...avulsos];
 }
 
@@ -125,10 +142,12 @@ export type Cliente = { slug: string; nome: string; viewBox: string; altura: num
 export const clientes = clientesJson.clientes as Cliente[];
 
 export type Numero = { valor: string; rotulo: string; fonte: string };
-export const numeros = numerosJson.numeros as Numero[];
+export function numeros(lang: Locale = "pt"): Numero[] {
+  return localize(numerosJson.numeros as Numero[], lang);
+}
 
 export type Empresa = { nome: string; site: string; parte: string; texto: string };
-export const site = siteJson as {
+type Site = {
   heroCase: string;
   /** Frame próprio para o hero e o key visual (ex.: /media/hero/kfc.webp). Vazio: usa a capa do YouTube do heroCase. */
   heroImagem: string;
@@ -142,8 +161,14 @@ export const site = siteJson as {
   redes: { nome: string; url: string }[];
   empresas: { insula: Empresa; begen: Empresa };
 };
+export const site = siteJson as Site;
 
-export function whatsappUrl(text = "Olá! Quero conversar sobre um briefing com a be-front."): string | null {
+/** As duas empresas, com os textos no idioma da página. */
+export function empresas(lang: Locale = "pt"): Site["empresas"] {
+  return localize(site.empresas, lang);
+}
+
+export function whatsappUrl(lang: Locale = "pt"): string | null {
   const n = site.whatsapp.replace(/\D/g, "");
-  return n ? `https://wa.me/${n}?text=${encodeURIComponent(text)}` : null;
+  return n ? `https://wa.me/${n}?text=${encodeURIComponent(getDict(lang).whatsappText)}` : null;
 }

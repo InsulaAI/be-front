@@ -23,37 +23,58 @@
   "frames": [
     {
       "src": "/media/cases/begen-admultify/key-visual.webp",
-      "legenda": "Key visual e as primeiras variações"
+      "legenda": "Key visual e as primeiras variações",
+      "en": {
+        "legenda": "Key visual and the first variations"
+      }
     },
     {
       "src": "/media/cases/begen-admultify/editor.webp",
-      "legenda": "Mapeamento dos elementos na plataforma"
+      "legenda": "Mapeamento dos elementos na plataforma",
+      "en": {
+        "legenda": "Mapping the elements in the platform"
+      }
     },
     {
       "src": "/media/cases/begen-admultify/previas.webp",
-      "legenda": "Prévias para revisão"
+      "legenda": "Prévias para revisão",
+      "en": {
+        "legenda": "Previews for review"
+      }
     },
     {
       "src": "/media/cases/begen-admultify/gerados.webp",
-      "legenda": "114 anúncios gerados"
+      "legenda": "114 anúncios gerados",
+      "en": {
+        "legenda": "114 ads generated"
+      }
     },
     {
       "src": "/media/cases/begen-admultify/resize.mp4",
       "webm": "/media/cases/begen-admultify/resize.webm",
       "poster": "/media/cases/begen-admultify/resize-poster.webp",
-      "legenda": "Redimensionar para os formatos de display"
+      "legenda": "Redimensionar para os formatos de display",
+      "en": {
+        "legenda": "Resizing into display formats"
+      }
     },
     {
       "src": "/media/cases/begen-admultify/amplify.mp4",
       "webm": "/media/cases/begen-admultify/amplify.webm",
       "poster": "/media/cases/begen-admultify/amplify-poster.webp",
-      "legenda": "Variar a mensagem"
+      "legenda": "Variar a mensagem",
+      "en": {
+        "legenda": "Varying the message"
+      }
     },
     {
       "src": "/media/cases/begen-admultify/variety.mp4",
       "webm": "/media/cases/begen-admultify/variety.webm",
       "poster": "/media/cases/begen-admultify/variety-poster.webp",
-      "legenda": "Ampliar o alcance"
+      "legenda": "Ampliar o alcance",
+      "en": {
+        "legenda": "Amplifying reach"
+      }
     }
   ],
   "variacoes": [],
@@ -62,7 +83,11 @@
       "valor": "114",
       "rotulo": "anúncios gerados a partir de um key visual",
       "fonte": "Begen, demonstração do AdMultify",
-      "periodo": "begen.ai, 2025"
+      "periodo": "begen.ai, 2025",
+      "en": {
+        "rotulo": "ads generated from one key visual",
+        "fonte": "Begen, AdMultify demo"
+      }
     }
   ],
   "creditos": {
@@ -70,5 +95,12 @@
     "begen": [],
     "agencia": [],
     "cliente": []
+  },
+  "en": {
+    "campanha": "Demo: Campaign rollout at a glance",
+    "setor": "technology",
+    "resumo": "A demo key visual rolled out by AdMultify into 114 ads.",
+    "desafio": "Rolling a campaign out across every format is slow, repetitive and manual. Each new asset is the same work, redone by hand.",
+    "solucao": "AdMultify takes the key visual (images, fonts and data), maps the position and variations of each element, shows previews for review and generates every variation at once. Demo material published by Begen."
   }
 }

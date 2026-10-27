@@ -29,5 +29,9 @@
     "cliente": [
       "Unilever"
     ]
+  },
+  "en": {
+    "setor": "home care",
+    "resumo": "Volume and repeat work within the same advertiser."
   }
 }

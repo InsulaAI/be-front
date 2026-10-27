@@ -6,7 +6,16 @@ const nextConfig: NextConfig = {
     remotePatterns: [{ protocol: "https", hostname: "i.ytimg.com", pathname: "/vi/**" }],
   },
   async redirects() {
-    return [{ source: "/", destination: "/pt", permanent: false }];
+    return [
+      // A raiz abre no idioma do navegador: português vai para /pt, qualquer outro para /en.
+      {
+        source: "/",
+        has: [{ type: "header", key: "accept-language", value: "(?!pt).*" }],
+        destination: "/en",
+        permanent: false,
+      },
+      { source: "/", destination: "/pt", permanent: false },
+    ];
   },
 };
 

@@ -1,9 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { caseImage, displayBrand, type Case } from "@/lib/content";
+import { getDict } from "@/lib/dict";
 import { entregaLabel } from "@/lib/labels";
 
 export default function CaseCard({ c, lang, large = false }: { c: Case; lang: string; large?: boolean }) {
+  const t = getDict(lang).card;
   const r = c.resultados[0];
   const img = caseImage(c);
   return (
@@ -12,16 +14,16 @@ export default function CaseCard({ c, lang, large = false }: { c: Case; lang: st
         {img ? (
           <Image
             src={img}
-            alt={c.youtubeId ? `Frame do filme ${c.confidencial ? displayBrand(c) : c.campanha}` : `${displayBrand(c)}: ${c.campanha}`}
+            alt={c.youtubeId ? `${t.frameOf} ${c.confidencial ? displayBrand(c) : c.campanha}` : `${displayBrand(c)}: ${c.campanha}`}
             fill
             sizes={large ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"}
             className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
           />
         ) : (
-          <div className="absolute inset-0 grid place-items-center text-text-3">sem imagem</div>
+          <div className="absolute inset-0 grid place-items-center text-text-3">{t.noImage}</div>
         )}
         <span className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-        {c.confidencial && <span className="tag tag-accent absolute left-4 top-4 bg-ground/70">Sob consulta</span>}
+        {c.confidencial && <span className="tag tag-accent absolute left-4 top-4 bg-ground/70">{t.underRequest}</span>}
         {r && (
           <div className="absolute bottom-4 left-4 right-4 flex items-end gap-3">
             <span className="display text-[clamp(32px,4vw,52px)] leading-none text-accent">{r.valor}</span>
@@ -45,7 +47,7 @@ export default function CaseCard({ c, lang, large = false }: { c: Case; lang: st
         </span>
       </div>
       <p className="eyebrow mt-3">
-        {[c.ano, c.setor, entregaLabel(c.entrega)].filter(Boolean).join(" · ")}
+        {[c.ano, c.setor, entregaLabel(c.entrega, lang)].filter(Boolean).join(" · ")}
       </p>
     </Link>
   );

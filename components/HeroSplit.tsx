@@ -2,24 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { getDict } from "@/lib/dict";
 import { useEffect, useRef, useState } from "react";
 
 type Rect = { x: number; y: number; w: number; h: number };
-type Tile = { key: string; label: string };
 type Media = { image: string; focus?: string; loop?: { mp4: string; webm: string; poster: string } };
 
-const TILES_DESKTOP: Tile[] = [
-  { key: "master", label: "16:9 · YouTube e TV" },
-  { key: "vertical", label: "9:16 · Reels e Shorts" },
-  { key: "square", label: "1:1 · Feed" },
-  { key: "banner", label: "728×90 · Display" },
-];
-const TILES_MOBILE: Tile[] = [
-  { key: "master", label: "16:9 · YouTube" },
-  { key: "vertical", label: "9:16 · Reels" },
-  { key: "square", label: "1:1 · Feed" },
-  { key: "banner", label: "320×100" },
-];
+const TILE_KEYS = ["master", "vertical", "square", "banner"] as const;
 
 /** Onde cada formato termina, em pixels, com o bloco começando em y = 0 e cabendo em `ah` de altura. */
 function layout(W: number, ah: number): Rect[] {
@@ -67,7 +56,8 @@ function layout(W: number, ah: number): Rect[] {
 const ease = (t: number) => 1 - Math.pow(1 - t, 3);
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 
-export default function HeroSplit({ lang, media, title, intro }: { lang: string; media: Media; title: string; intro: string }) {
+export default function HeroSplit({ lang, media }: { lang: string; media: Media }) {
+  const t = getDict(lang);
   const section = useRef<HTMLElement>(null);
   const stage = useRef<HTMLDivElement>(null);
   const tiles = useRef<(HTMLDivElement | null)[]>([]);
@@ -179,14 +169,14 @@ export default function HeroSplit({ lang, media, title, intro }: { lang: string;
     });
   }, [paused]);
 
-  const list = mobile ? TILES_MOBILE : TILES_DESKTOP;
+  const labels = mobile ? t.hero.tilesMobile : t.hero.tiles;
 
   return (
-    <section ref={section} aria-label="Abertura" className={reduced ? "relative h-[100svh]" : "relative h-[260svh]"}>
+    <section ref={section} aria-label={t.hero.aria} className={reduced ? "relative h-[100svh]" : "relative h-[260svh]"}>
       <div ref={stage} className="sticky top-0 h-[100svh] overflow-hidden">
-        {list.map((tile, i) => (
+        {TILE_KEYS.map((key, i) => (
           <div
-            key={tile.key}
+            key={key}
             ref={(el) => {
               tiles.current[i] = el;
             }}
@@ -214,7 +204,7 @@ export default function HeroSplit({ lang, media, title, intro }: { lang: string;
             ) : (
               <Image
                 src={media.image}
-                alt={i === 0 ? "Frame do filme-mestre" : ""}
+                alt={i === 0 ? t.hero.frameAlt : ""}
                 fill
                 sizes="100vw"
                 priority={i === 0}
@@ -226,7 +216,7 @@ export default function HeroSplit({ lang, media, title, intro }: { lang: string;
               data-label
               className="eyebrow absolute bottom-0 left-0 whitespace-nowrap rounded-tr-lg bg-ground/80 px-2.5 py-1.5 !text-[10px] !text-text-2 opacity-0 md:!text-[11px]"
             >
-              {tile.label}
+              {labels[i]}
             </span>
           </div>
         ))}
@@ -236,17 +226,17 @@ export default function HeroSplit({ lang, media, title, intro }: { lang: string;
         <div ref={copy} className="absolute inset-x-0 bottom-0 z-[4] pb-[12svh]">
           <div className="wrap">
             <p className="eyebrow mb-5">
-              <b>●</b>&nbsp; be-front, powered by Insula e Begen
+              <b>●</b>&nbsp; {t.powered}
             </p>
-            <h1 className="display max-w-[14ch] text-[clamp(44px,8vw,112px)]">{title}</h1>
-            <p className="lede mt-6">{intro}</p>
+            <h1 className="display max-w-[14ch] text-[clamp(44px,8vw,112px)]">{t.hero.title}</h1>
+            <p className="lede mt-6">{t.hero.intro}</p>
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <Link href={`/${lang}/cases`} className="btn btn-accent">
-                Ver cases
+                {t.hero.seeCases}
                 <span aria-hidden>→</span>
               </Link>
               <Link href={`/${lang}/como-funciona`} className="btn btn-ghost">
-                Como funciona
+                {t.hero.how}
               </Link>
             </div>
           </div>
@@ -255,7 +245,7 @@ export default function HeroSplit({ lang, media, title, intro }: { lang: string;
         <div ref={after} className="pointer-events-none absolute inset-x-0 top-[80px] z-[4] opacity-0">
           <div className="wrap">
             <p className="display text-[clamp(22px,3vw,36px)]">
-              Um filme-mestre. <span className="text-text-3">Todos os formatos.</span>
+              {t.hero.after[0]} <span className="text-text-3">{t.hero.after[1]}</span>
             </p>
           </div>
         </div>
@@ -269,10 +259,10 @@ export default function HeroSplit({ lang, media, title, intro }: { lang: string;
                 className="eyebrow rounded-full border border-line-2 bg-ground/60 px-3 py-2 !text-text-2 backdrop-blur hover:!text-text"
                 aria-pressed={paused}
               >
-                {paused ? "▶ Tocar" : "❚❚ Pausar"}
+                {paused ? t.loop.play : t.loop.pause}
               </button>
             )}
-            <span className="eyebrow hidden md:inline">Role para ver ↓</span>
+            <span className="eyebrow hidden md:inline">{t.hero.scroll}</span>
           </div>
         )}
       </div>

@@ -30,5 +30,11 @@
     "cliente": [
       "KFC"
     ]
+  },
+  "en": {
+    "campanha": "KFC, digital cut",
+    "setor": "food",
+    "resumo": "The same film as a digital cut and in 9:16, on a short turnaround.",
+    "solucao": "The same film as a digital cut and in 9:16, on a short turnaround."
   }
 }

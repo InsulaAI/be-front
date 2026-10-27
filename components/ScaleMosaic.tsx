@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { Variacao } from "@/lib/content";
+import { getDict } from "@/lib/dict";
 
 function ratio(formato: string) {
   const m = formato.match(/^(\d+)\s*[:x×]\s*(\d+)$/);
@@ -9,7 +10,8 @@ function ratio(formato: string) {
 }
 
 /** As variações da Begen, filtráveis por formato e por canal. */
-export default function ScaleMosaic({ items }: { items: Variacao[] }) {
+export default function ScaleMosaic({ lang, items }: { lang: string; items: Variacao[] }) {
+  const t = getDict(lang).mosaic;
   const [formato, setFormato] = useState("");
   const [canal, setCanal] = useState("");
   const formatos = [...new Set(items.map((v) => v.formato))];
@@ -23,7 +25,7 @@ export default function ScaleMosaic({ items }: { items: Variacao[] }) {
     <div>
       <div className="flex flex-col gap-4 md:flex-row md:gap-10">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="eyebrow mr-2">Formato</span>
+          <span className="eyebrow mr-2">{t.format}</span>
           {formatos.map((f) => (
             <button key={f} type="button" aria-pressed={formato === f} className={chip(formato === f)} onClick={() => setFormato(formato === f ? "" : f)}>
               {f}
@@ -31,7 +33,7 @@ export default function ScaleMosaic({ items }: { items: Variacao[] }) {
           ))}
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          <span className="eyebrow mr-2">Canal</span>
+          <span className="eyebrow mr-2">{t.channel}</span>
           {canais.map((c) => (
             <button key={c} type="button" aria-pressed={canal === c} className={chip(canal === c)} onClick={() => setCanal(canal === c ? "" : c)}>
               {c}
@@ -40,7 +42,7 @@ export default function ScaleMosaic({ items }: { items: Variacao[] }) {
         </div>
       </div>
       <p className="eyebrow mt-6" aria-live="polite">
-        {list.length} de {items.length} peças
+        {list.length} {t.of} {items.length} {t.pieces}
       </p>
       <div className="mt-4 columns-2 gap-3 sm:columns-3 lg:columns-4">
         {list.map((v, i) => (

@@ -13,6 +13,8 @@ type Props = {
   priority?: boolean;
   className?: string;
   caption?: string;
+  /** Rótulo do botão de play, no idioma da página ("Assistir", "Watch"). */
+  watchLabel?: string;
 };
 
 export function embedUrl(id: string, autoplay: boolean) {
@@ -31,7 +33,7 @@ export function embedUrl(id: string, autoplay: boolean) {
  * Player em "facade": mostra a capa e um botão de play. O iframe do YouTube só entra no clique,
  * para não pesar a página nem chamar o YouTube antes da hora.
  */
-export default function YouTube({ id, title, autoplay = false, priority = false, className = "", caption }: Props) {
+export default function YouTube({ id, title, autoplay = false, priority = false, className = "", caption, watchLabel = "Assistir" }: Props) {
   const [active, setActive] = useState(autoplay);
   const [thumb, setThumb] = useState(ytThumb(id));
 
@@ -45,7 +47,7 @@ export default function YouTube({ id, title, autoplay = false, priority = false,
             type="button"
             onClick={() => setActive(true)}
             className="group absolute inset-0 h-full w-full cursor-pointer"
-            aria-label={`Assistir: ${title}`}
+            aria-label={`${watchLabel}: ${title}`}
           >
             <Image
               src={thumb}

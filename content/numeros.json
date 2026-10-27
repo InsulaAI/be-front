@@ -4,17 +4,31 @@
     {
       "valor": "18 dias",
       "rotulo": "do roteiro ao filme final, em média",
-      "fonte": "Insula, ciclo de produção"
+      "fonte": "Insula, ciclo de produção",
+      "en": {
+        "valor": "18 days",
+        "rotulo": "from script to final film, on average",
+        "fonte": "Insula, production cycle"
+      }
     },
     {
       "valor": "850+",
       "rotulo": "cenas de vídeo geradas com IA em um único filme",
-      "fonte": "Insula, projeto Brilhante (Unilever), 2026"
+      "fonte": "Insula, projeto Brilhante (Unilever), 2026",
+      "en": {
+        "rotulo": "AI-generated video scenes in a single film",
+        "fonte": "Insula, Brilhante project (Unilever), 2026"
+      }
     },
     {
       "valor": "1.000+",
       "rotulo": "imagens estáticas no mesmo projeto",
-      "fonte": "Insula, projeto Brilhante (Unilever), 2026"
+      "fonte": "Insula, projeto Brilhante (Unilever), 2026",
+      "en": {
+        "valor": "1,000+",
+        "rotulo": "still images in the same project",
+        "fonte": "Insula, Brilhante project (Unilever), 2026"
+      }
     }
   ]
 }

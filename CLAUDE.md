@@ -134,7 +134,7 @@ Os dados de exemplo devem ser claramente fictícios (marca "Marca Exemplo"). Nun
 ## Como o projeto está montado
 
 ```
-app/[lang]/            páginas (só "pt" está ativo; ver lib/i18n.ts)
+app/[lang]/            páginas, em /pt e /en (mesmos caminhos nos dois idiomas)
 app/api/briefing/      envio do formulário (Resend), com anti-spam
 components/            HeroSplit (quadro que se divide), KeyVisual (controle deslizante),
                        YouTube (facade), FilmGallery (galeria + modal), ScaleMosaic etc.
@@ -144,6 +144,7 @@ content/clientes.json  logos autorizados, SVG em currentColor
 content/numeros.json   números da home, sempre com fonte
 content/site.json      contatos, links das empresas, case do hero e do key visual
 lib/content.ts         leitura do conteúdo (servidor). lib/labels.ts serve aos dois lados
+lib/dict.ts            todos os textos da interface, em PT e EN
 ```
 
 Campos além do modelo acima: `origem` (insula, begen, be-front), `produto`, `destaque` (entra na
@@ -154,7 +155,8 @@ home), `privado` (fora das listas e do sitemap, só por link direto, com `noinde
 ## Decisões tomadas
 
 - **27/10**: repositório próprio, `InsulaAI/be-front`, separado do InfoMemo (`InsulaAI/projetoframe`), que é confidencial.
-- **27/10**: Next.js 16 + Tailwind 4, como recomendado acima. EN fica para depois: a rota `/en` está prevista em `lib/i18n.ts`, e o seletor do rodapé mostra EN desativado.
+- **27/10**: Next.js 16 + Tailwind 4, como recomendado acima.
+- **27/10**: site em PT e EN. Textos da interface em `lib/dict.ts` (o inglês segue o mesmo tom, sem tradução literal). No conteúdo, qualquer objeto pode ter um campo `"en"` com os textos em inglês (no case, num resultado, numa legenda); em /en eles substituem os em português, e o que não tiver `"en"` aparece em português. Seletor PT | EN no cabeçalho e no rodapé, que leva à mesma página no outro idioma. A raiz (`/`) abre em /pt para navegador em português e em /en para os demais. Termos: filme-mestre = master film, desdobramento = rollout, entrega = delivery, peças = assets.
 - **27/10**: os clientes que podem aparecer com nome são os do InfoMemo da Insula: Unilever (Brilhante, Clear Men, CIF), KFC, JBS (pela Maturatta) e Natura. Os seis cases da Insula vêm de lá, com os mesmos IDs do YouTube e só os fatos que estão lá. O filme e o logo da Natura saíram do site em 27/10, a pedido.
 - **27/10**: no ar na Vercel em https://be-front-ten.vercel.app/pt, ligado ao `main` deste repositório: cada push publica sozinho.
 - O hero e o bloco do key visual usam a capa do YouTube do KFC (pedido de 27/10, no lugar do Brilhante), com o recorte centrado no rosto (`heroFoco`), enquanto não houver loop próprio. Desde 27/10, o frame é o do Coronel Sanders (`17_CORONEL_06.png`, do Drive da Insula, em `public/media/hero/kfc-coronel.webp`, via `heroImagem`), com o recorte no rosto dele (`heroFoco`). Os quadros automáticos do YouTube não mostram o Coronel. Com `heroLoop` preenchido em `site.json`, o loop entra no lugar, com botão de pausa.

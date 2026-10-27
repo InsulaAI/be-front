@@ -4,13 +4,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { Filme } from "@/lib/content";
-import { TIPO_LABEL, entregaLabel, ytThumb } from "@/lib/labels";
+import { getDict } from "@/lib/dict";
+import { entregaLabel, tipoLabel, ytThumb } from "@/lib/labels";
 import { PlayBadge, Player } from "./YouTube";
 
 type Filters = { categoria: string; tipo: string; setor: string; entrega: string; ano: string };
 const EMPTY: Filters = { categoria: "", tipo: "", setor: "", entrega: "", ano: "" };
 
 export default function FilmGallery({ films, lang }: { films: Filme[]; lang: string }) {
+  const t = getDict(lang);
+  const g = t.gallery;
   const [f, setF] = useState<Filters>(EMPTY);
   const [open, setOpen] = useState<Filme | null>(null);
 
@@ -24,7 +27,7 @@ export default function FilmGallery({ films, lang }: { films: Filme[]; lang: str
   const options = useMemo(() => {
     const uniq = <T,>(a: T[]) => [...new Set(a.filter(Boolean))] as T[];
     return {
-      tipo: uniq(films.map((x) => x.tipo)).map((t) => ({ v: t!, l: TIPO_LABEL[t!] })),
+      tipo: uniq(films.map((x) => x.tipo)).map((t) => ({ v: t!, l: tipoLabel(t!, lang) })),
       setor: uniq(films.map((x) => x.setor)).sort().map((s) => ({ v: s!, l: s! })),
       ano: uniq(films.map((x) => x.ano)).sort((a, b) => b! - a!).map((a) => ({ v: String(a), l: String(a) })),
     };
@@ -36,7 +39,7 @@ export default function FilmGallery({ films, lang }: { films: Filme[]; lang: str
       (!f.tipo || x.tipo === f.tipo) &&
       (!f.setor || x.setor === f.setor) &&
       (!f.ano || String(x.ano) === f.ano) &&
-      (!f.entrega || entregaLabel(x.entrega) === f.entrega),
+      (!f.entrega || entregaLabel(x.entrega, lang) === f.entrega),
   );
 
   const set = (k: keyof Filters) => (v: string) => setF((s) => ({ ...s, [k]: s[k] === v ? "" : v }));
@@ -45,25 +48,25 @@ export default function FilmGallery({ films, lang }: { films: Filme[]; lang: str
   return (
     <>
       <div className="flex flex-col gap-5 border-y border-line py-6">
-        <ChipRow label="Tipo de filme" value={f.categoria} onChange={set("categoria")} options={[{ v: "publicidade", l: "Publicidade" }, { v: "autoral", l: "Autoral" }]} />
-        {options.tipo.length > 0 && <ChipRow label="Técnica" value={f.tipo} onChange={set("tipo")} options={options.tipo} />}
+        <ChipRow label={g.kind} value={f.categoria} onChange={set("categoria")} options={[{ v: "publicidade", l: g.publicidade }, { v: "autoral", l: g.autoral }]} />
+        {options.tipo.length > 0 && <ChipRow label={g.tech} value={f.tipo} onChange={set("tipo")} options={options.tipo} />}
         <ChipRow
-          label="Entrega"
+          label={g.delivery}
           value={f.entrega}
           onChange={set("entrega")}
-          options={["Filme", "Desdobramento", "Filme e desdobramento"].map((l) => ({ v: l, l: l === "Filme e desdobramento" ? "Ambos" : l }))}
+          options={[t.labels.entrega.filme, t.labels.entrega.desdobramento, t.labels.entrega.ambos].map((l) => ({ v: l, l: l === t.labels.entrega.ambos ? g.both : l }))}
         />
-        <ChipRow label="Setor" value={f.setor} onChange={set("setor")} options={options.setor} />
-        <ChipRow label="Ano" value={f.ano} onChange={set("ano")} options={options.ano} />
+        <ChipRow label={g.sector} value={f.setor} onChange={set("setor")} options={options.setor} />
+        <ChipRow label={g.year} value={f.ano} onChange={set("ano")} options={options.ano} />
       </div>
 
       <div className="mt-6 flex items-center justify-between">
         <p className="eyebrow" aria-live="polite">
-          {list.length} {list.length === 1 ? "filme" : "filmes"}
+          {list.length} {g.film[list.length === 1 ? 0 : 1]}
         </p>
         {active && (
           <button type="button" className="eyebrow underline-offset-4 hover:text-text hover:underline" onClick={() => setF(EMPTY)}>
-            Limpar filtros
+            {g.clear}
           </button>
         )}
       </div>
@@ -71,23 +74,23 @@ export default function FilmGallery({ films, lang }: { films: Filme[]; lang: str
       <ul className="mt-6 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
         {list.map((x) => (
           <li key={x.youtubeId}>
-            <button type="button" onClick={() => setOpen(x)} className="group block w-full text-left" aria-label={`Assistir: ${x.titulo}`}>
+            <button type="button" onClick={() => setOpen(x)} className="group block w-full text-left" aria-label={`${g.watch}: ${x.titulo}`}>
               <div className="frame aspect-video">
                 <Thumb id={x.youtubeId} />
                 <span className="absolute inset-0 bg-black/20 transition-colors group-hover:bg-black/0" />
                 <PlayBadge small />
-                {x.caseSlug && <span className="tag tag-accent absolute left-3 top-3 bg-ground/75">com case</span>}
-                {x.semAudio && <span className="tag absolute right-3 top-3 bg-ground/75">sem áudio</span>}
+                {x.caseSlug && <span className="tag tag-accent absolute left-3 top-3 bg-ground/75">{g.withCase}</span>}
+                {x.semAudio && <span className="tag absolute right-3 top-3 bg-ground/75">{g.noAudio}</span>}
               </div>
               <h3 className="display mt-4 text-[22px]">{x.titulo}</h3>
               <p className="eyebrow mt-2">
-                {[x.categoria === "autoral" ? "Autoral" : null, x.ano, x.setor, x.tipo ? TIPO_LABEL[x.tipo] : null].filter(Boolean).join(" · ")}
+                {[x.categoria === "autoral" ? g.autoral : null, x.ano, x.setor, x.tipo ? tipoLabel(x.tipo, lang) : null].filter(Boolean).join(" · ")}
               </p>
             </button>
           </li>
         ))}
       </ul>
-      {list.length === 0 && <p className="mt-10 text-text-2">Nenhum filme com essa combinação de filtros.</p>}
+      {list.length === 0 && <p className="mt-10 text-text-2">{g.none}</p>}
 
       {open && <FilmModal film={open} lang={lang} onClose={() => setOpen(null)} />}
     </>
@@ -134,6 +137,7 @@ function ChipRow({ label, value, onChange, options }: { label: string; value: st
 
 /** Player em tela cheia, com som e legendas. Fecha com Esc, no X ou clicando fora. */
 function FilmModal({ film, lang, onClose }: { film: Filme; lang: string; onClose: () => void }) {
+  const g = getDict(lang).gallery;
   const dialog = useRef<HTMLDivElement>(null);
   const [copied, setCopied] = useState(false);
 
@@ -182,7 +186,7 @@ function FilmModal({ film, lang, onClose }: { film: Filme; lang: string; onClose
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      window.prompt("Copie o link:", url.toString());
+      window.prompt(g.copyPrompt, url.toString());
     }
   }
 
@@ -199,14 +203,14 @@ function FilmModal({ film, lang, onClose }: { film: Filme; lang: string; onClose
         <p className="display truncate text-[18px] md:text-[22px]">{film.titulo}</p>
         <div className="flex shrink-0 items-center gap-2">
           <button type="button" onClick={copy} className="btn btn-ghost h-10 px-4 text-sm">
-            {copied ? "Link copiado" : "Copiar link"}
+            {copied ? g.copied : g.copy}
           </button>
           {film.caseSlug && (
             <Link href={`/${lang}/cases/${film.caseSlug}`} className="btn btn-ghost hidden h-10 px-4 text-sm sm:inline-flex">
-              Ver case
+              {g.seeCase}
             </Link>
           )}
-          <button type="button" onClick={close} aria-label="Fechar" className="grid h-10 w-10 place-items-center rounded-full border border-line-2 text-lg hover:border-text">
+          <button type="button" onClick={close} aria-label={g.close} className="grid h-10 w-10 place-items-center rounded-full border border-line-2 text-lg hover:border-text">
             ×
           </button>
         </div>

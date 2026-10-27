@@ -1,7 +1,6 @@
-// PT é o idioma padrão. EN tem rota prevista (/en) e entra quando o conteúdo em inglês existir:
-// basta incluir "en" em LOCALES e preencher o dicionário.
-export const LOCALES = ["pt"] as const;
-export const PLANNED_LOCALES = ["pt", "en"] as const;
+// PT é o idioma padrão; EN tem o mesmo site em /en. Os caminhos das páginas são os mesmos nos
+// dois idiomas (/pt/filmes e /en/filmes), o que mantém o seletor de idioma trivial.
+export const LOCALES = ["pt", "en"] as const;
 export type Locale = (typeof LOCALES)[number];
 
 export function isLocale(v: string): v is Locale {
@@ -14,15 +13,24 @@ export const SITE_URL =
   (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000");
 
 export const NAV = [
-  { href: "/filmes", label: "Filmes" },
-  { href: "/cases", label: "Cases" },
-  { href: "/como-funciona", label: "Como funciona" },
-  { href: "/insula-e-begen", label: "Insula e Begen" },
-];
+  { href: "/filmes", key: "filmes" },
+  { href: "/cases", key: "cases" },
+  { href: "/como-funciona", key: "comoFunciona" },
+  { href: "/insula-e-begen", key: "insulaBegen" },
+] as const;
+
+/** O mesmo caminho no outro idioma: /pt/cases/kfc → /en/cases/kfc. */
+export function swapLocale(pathname: string, to: Locale): string {
+  return pathname.replace(/^\/(pt|en)(?=\/|$)/, `/${to}`) || `/${to}`;
+}
 
 export function hreflang(lang: Locale, pathname: string) {
   return {
     canonical: `/${lang}${pathname}`,
-    languages: Object.fromEntries(LOCALES.map((l) => [l === "pt" ? "pt-BR" : l, `/${l}${pathname}`])),
+    languages: {
+      "pt-BR": `/pt${pathname}`,
+      en: `/en${pathname}`,
+      "x-default": `/pt${pathname}`,
+    },
   };
 }

@@ -18,13 +18,21 @@
       "nome": "Insula",
       "site": "https://insula-ai.com/",
       "parte": "Filme-mestre",
-      "texto": "Label de filmes publicitários com IA e híbridos (captação real mais IA), criado por Luciano Mathias e Caíto Cyrillo. Faz o filme-mestre: roteiro, direção, geração e finalização, com linguagem de cinema. Do roteiro ao filme final em cerca de 18 dias."
+      "texto": "Label de filmes publicitários com IA e híbridos (captação real mais IA), criado por Luciano Mathias e Caíto Cyrillo. Faz o filme-mestre: roteiro, direção, geração e finalização, com linguagem de cinema. Do roteiro ao filme final em cerca de 18 dias.",
+      "en": {
+        "parte": "Master film",
+        "texto": "A label for AI and hybrid (live action plus AI) advertising films, founded by Luciano Mathias and Caíto Cyrillo. It makes the master film: script, direction, generation and finishing, with a cinematic language. From script to final film in about 18 days."
+      }
     },
     "begen": {
       "nome": "Begen",
       "site": "https://begen.ai/",
       "parte": "Desdobramento",
-      "texto": "Criadora do AdMultify, que transforma o key visual de uma campanha em centenas de variações de formato e mensagem, prontas para cada canal."
+      "texto": "Criadora do AdMultify, que transforma o key visual de uma campanha em centenas de variações de formato e mensagem, prontas para cada canal.",
+      "en": {
+        "parte": "Rollout",
+        "texto": "Maker of AdMultify, which turns a campaign's key visual into hundreds of format and message variations, ready for every channel."
+      }
     }
   }
 }
