@@ -1,12 +1,13 @@
 {
   "_leia": "Contatos e textos fixos. Campo vazio esconde o item no site (WhatsApp, agenda, e-mail, redes, links das empresas).",
-  "heroCase": "unilever-brilhante",
+  "heroCase": "kfc",
+  "heroFoco": "62% 35%",
   "heroLoop": {
     "mp4": "",
     "webm": "",
     "poster": ""
   },
-  "keyVisualCase": "jbs-maturatta",
+  "keyVisualCase": "kfc",
   "email": "",
   "whatsapp": "",
   "agenda": "",

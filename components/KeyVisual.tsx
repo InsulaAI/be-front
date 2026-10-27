@@ -19,10 +19,12 @@ const FORMATS = [
   { r: "4 / 5", f: "4:5", c: "Pinterest" },
 ];
 const MESSAGES = ["Mensagem A", "Mensagem B", "Mensagem C", "Mensagem D", "Mensagem E", "Mensagem F"];
-const POS = ["50% 50%", "30% 50%", "70% 50%", "50% 30%", "50% 70%", "20% 40%", "80% 60%"];
+// Pequenas variações de recorte em torno do foco do frame.
+const JITTER = [[0, 0], [-8, 4], [6, -4], [-4, -6], [8, 6], [-10, 0], [4, 8]];
 const MAX = 120;
 
-export default function KeyVisual({ image }: { image: string }) {
+export default function KeyVisual({ image, focus = "50% 50%" }: { image: string; focus?: string }) {
+  const [fx, fy] = focus.split(" ").map((v) => parseFloat(v));
   const [n, setN] = useState(1);
   const id = useId();
 
@@ -31,9 +33,9 @@ export default function KeyVisual({ image }: { image: string }) {
       Array.from({ length: MAX }, (_, i) => ({
         ...FORMATS[i % FORMATS.length],
         m: MESSAGES[(i + Math.floor(i / FORMATS.length)) % MESSAGES.length],
-        pos: POS[(i * 5) % POS.length],
+        pos: `${fx + JITTER[(i * 5) % JITTER.length][0]}% ${fy + JITTER[(i * 5) % JITTER.length][1]}%`,
       })),
-    [],
+    [fx, fy],
   );
 
   const shown = pieces.slice(0, n);

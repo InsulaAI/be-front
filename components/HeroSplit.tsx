@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 
 type Rect = { x: number; y: number; w: number; h: number };
 type Tile = { key: string; label: string };
-type Media = { image: string; loop?: { mp4: string; webm: string; poster: string } };
+type Media = { image: string; focus?: string; loop?: { mp4: string; webm: string; poster: string } };
 
 const TILES_DESKTOP: Tile[] = [
   { key: "master", label: "16:9 · YouTube e TV" },
@@ -200,6 +200,7 @@ export default function HeroSplit({ lang, media, title, intro }: { lang: string;
                   videos.current[i] = el;
                 }}
                 className="h-full w-full object-cover"
+                style={{ objectPosition: media.focus }}
                 autoPlay={!reduced}
                 muted
                 loop
@@ -218,6 +219,7 @@ export default function HeroSplit({ lang, media, title, intro }: { lang: string;
                 sizes="100vw"
                 priority={i === 0}
                 className="object-cover"
+                style={{ objectPosition: media.focus }}
               />
             )}
             <span

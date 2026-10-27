@@ -120,6 +120,8 @@ export const numeros = numerosJson.numeros as Numero[];
 export type Empresa = { nome: string; site: string; parte: string; texto: string };
 export const site = siteJson as {
   heroCase: string;
+  /** object-position do frame nos recortes (hero e key visual), para o rosto não sair do quadro */
+  heroFoco: string;
   heroLoop: { mp4: string; webm: string; poster: string };
   keyVisualCase: string;
   email: string;

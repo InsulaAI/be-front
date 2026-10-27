@@ -36,7 +36,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         lang={lang}
         title="Um filme. Todos os formatos."
         intro="Do conceito cinematográfico à entrega em cada canal, em um fluxo só: a Insula faz o filme-mestre e a Begen o transforma em centenas de peças."
-        media={{ image: hero?.youtubeId ? ytThumb(hero.youtubeId) : "", loop: site.heroLoop }}
+        media={{ image: hero?.youtubeId ? ytThumb(hero.youtubeId) : "", focus: site.heroFoco, loop: site.heroLoop }}
       />
 
       {/* 2. Método */}
@@ -78,7 +78,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             O mesmo quadro, recortado para cada formato e reescrito para cada mensagem.
           </SectionHead>
           <Reveal>
-            <KeyVisual image={ytThumb(kv.youtubeId)} />
+            <KeyVisual image={ytThumb(kv.youtubeId)} focus={site.heroFoco} />
           </Reveal>
         </section>
       )}
