@@ -1,0 +1,37 @@
+{
+  "slug": "jbs-maturatta",
+  "ordem": 4,
+  "origem": "insula",
+  "marca": "Maturatta",
+  "produto": null,
+  "campanha": "Mês do Churrasco",
+  "agencia": "TBWA",
+  "ano": 2026,
+  "setor": "alimentação",
+  "tipo": null,
+  "entrega": [
+    "filme",
+    "desdobramento"
+  ],
+  "youtubeId": "ip4ZL_D2G88",
+  "destaque": true,
+  "confidencial": false,
+  "privado": false,
+  "semAudio": true,
+  "resumo": "Filme master, cortes e versões diárias, em 16:9 e 9:16.",
+  "desafio": null,
+  "solucao": "Filme master, cortes e versões diárias da campanha, cada um em 16:9 e em 9:16. Março de 2026.",
+  "frames": [],
+  "variacoes": [],
+  "resultados": [],
+  "creditos": {
+    "insula": [],
+    "begen": [],
+    "agencia": [
+      "TBWA"
+    ],
+    "cliente": [
+      "JBS"
+    ]
+  }
+}

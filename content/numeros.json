@@ -1,0 +1,20 @@
+{
+  "_leia": "Só números com fonte. Nunca inventar. Cada item aparece na home na ordem abaixo (3 a 4).",
+  "numeros": [
+    {
+      "valor": "18 dias",
+      "rotulo": "do roteiro ao filme final, em média",
+      "fonte": "Insula, ciclo de produção"
+    },
+    {
+      "valor": "850+",
+      "rotulo": "cenas de vídeo geradas com IA em um único filme",
+      "fonte": "Insula, projeto Brilhante (Unilever), 2026"
+    },
+    {
+      "valor": "1.000+",
+      "rotulo": "imagens estáticas no mesmo projeto",
+      "fonte": "Insula, projeto Brilhante (Unilever), 2026"
+    }
+  ]
+}

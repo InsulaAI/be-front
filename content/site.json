@@ -1,0 +1,28 @@
+{
+  "_leia": "Contatos e textos fixos. Campo vazio esconde o item no site (WhatsApp, agenda, e-mail, redes, links das empresas).",
+  "heroCase": "unilever-brilhante",
+  "heroLoop": {
+    "mp4": "",
+    "webm": "",
+    "poster": ""
+  },
+  "keyVisualCase": "jbs-maturatta",
+  "email": "",
+  "whatsapp": "",
+  "agenda": "",
+  "redes": [],
+  "empresas": {
+    "insula": {
+      "nome": "Insula",
+      "site": "",
+      "parte": "Filme-mestre",
+      "texto": "Label de filmes publicitários com IA e híbridos (captação real mais IA), criado por Luciano Mathias e Caíto Cyrillo. Faz o filme-mestre: roteiro, direção, geração e finalização, com linguagem de cinema. Do roteiro ao filme final em cerca de 18 dias."
+    },
+    "begen": {
+      "nome": "Begen",
+      "site": "",
+      "parte": "Desdobramento",
+      "texto": "Criadora do AdMultify, que transforma o key visual de uma campanha em centenas de variações de formato e mensagem, prontas para cada canal."
+    }
+  }
+}

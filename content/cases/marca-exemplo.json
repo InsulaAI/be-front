@@ -1,0 +1,36 @@
+{
+  "slug": "marca-exemplo",
+  "ordem": 99,
+  "rascunho": true,
+  "origem": "be-front",
+  "marca": "Marca Exemplo",
+  "produto": null,
+  "campanha": "Campanha Exemplo",
+  "agencia": "Agência Exemplo",
+  "ano": 2026,
+  "setor": "alimentos",
+  "tipo": "hibrido",
+  "entrega": ["filme", "desdobramento"],
+  "youtubeId": null,
+  "destaque": false,
+  "confidencial": false,
+  "privado": false,
+  "resumo": "Modelo de case com filme e desdobramento. Só aparece em desenvolvimento.",
+  "desafio": "Texto fictício. Duas ou três frases sobre o problema do cliente.",
+  "solucao": "Texto fictício. Técnica usada (IA, híbrido, captação) e como o filme virou peças.",
+  "frames": [],
+  "variacoes": [
+    { "src": null, "formato": "16:9", "canal": "YouTube" },
+    { "src": null, "formato": "9:16", "canal": "Reels" },
+    { "src": null, "formato": "9:16", "canal": "Shorts" },
+    { "src": null, "formato": "1:1", "canal": "Feed" },
+    { "src": null, "formato": "4:5", "canal": "Feed" },
+    { "src": null, "formato": "300x250", "canal": "Display" },
+    { "src": null, "formato": "728x90", "canal": "Display" },
+    { "src": null, "formato": "9:16", "canal": "Stories" }
+  ],
+  "resultados": [
+    { "valor": "000", "rotulo": "peças entregues (fictício)", "fonte": "Begen", "periodo": "00 dias" }
+  ],
+  "creditos": { "insula": ["Nome Exemplo"], "begen": ["Nome Exemplo"], "agencia": ["Agência Exemplo"], "cliente": ["Marca Exemplo"] }
+}

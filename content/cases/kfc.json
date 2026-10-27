@@ -1,0 +1,34 @@
+{
+  "slug": "kfc",
+  "ordem": 3,
+  "origem": "insula",
+  "marca": "KFC",
+  "produto": null,
+  "campanha": "KFC, corte digital",
+  "agencia": null,
+  "ano": 2026,
+  "setor": "alimentação",
+  "tipo": null,
+  "entrega": [
+    "filme",
+    "desdobramento"
+  ],
+  "youtubeId": "eqpwXXicUG4",
+  "destaque": true,
+  "confidencial": false,
+  "privado": false,
+  "resumo": "O mesmo filme em corte digital e em 9:16, em ciclo curto.",
+  "desafio": null,
+  "solucao": "O mesmo filme em corte digital e em 9:16, em ciclo curto.",
+  "frames": [],
+  "variacoes": [],
+  "resultados": [],
+  "creditos": {
+    "insula": [],
+    "begen": [],
+    "agencia": [],
+    "cliente": [
+      "KFC"
+    ]
+  }
+}

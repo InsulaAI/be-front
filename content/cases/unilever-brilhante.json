@@ -1,0 +1,48 @@
+{
+  "slug": "unilever-brilhante",
+  "ordem": 1,
+  "origem": "insula",
+  "marca": "Unilever",
+  "produto": "Brilhante",
+  "campanha": "Brilhante Perfume Extraordinário",
+  "agencia": "Droga5",
+  "ano": 2026,
+  "setor": "home care",
+  "tipo": "ia",
+  "entrega": [
+    "filme"
+  ],
+  "youtubeId": "J1M5u7rtXgI",
+  "destaque": true,
+  "confidencial": false,
+  "privado": false,
+  "resumo": "Primeiro filme 100% IA da Unilever Brasil.",
+  "desafio": "Levar uma marca de Home Care ao conteúdo publicitário feito com IA, dentro de um ecossistema completo de mídia e mensuração do Google.",
+  "solucao": "Filme 100% IA, do roteiro ao online final. Pelo Google, foi a primeira marca de Home Care no país a fazer isso.",
+  "frames": [],
+  "variacoes": [],
+  "resultados": [
+    {
+      "valor": "1.000+",
+      "rotulo": "imagens estáticas geradas com IA",
+      "fonte": "Insula",
+      "periodo": "projeto Brilhante, 2026"
+    },
+    {
+      "valor": "850+",
+      "rotulo": "cenas de vídeo geradas com IA",
+      "fonte": "Insula",
+      "periodo": "projeto Brilhante, 2026"
+    }
+  ],
+  "creditos": {
+    "insula": [],
+    "begen": [],
+    "agencia": [
+      "Droga5"
+    ],
+    "cliente": [
+      "Unilever"
+    ]
+  }
+}

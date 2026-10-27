@@ -1,0 +1,33 @@
+{
+  "slug": "unilever-cif",
+  "ordem": 5,
+  "origem": "insula",
+  "marca": "Unilever",
+  "produto": "CIF",
+  "campanha": "CIF Especialistas",
+  "agencia": null,
+  "ano": null,
+  "setor": "home care",
+  "tipo": null,
+  "entrega": [
+    "filme"
+  ],
+  "youtubeId": "ozeYzsmZTJU",
+  "destaque": false,
+  "confidencial": false,
+  "privado": false,
+  "resumo": "Volume e recorrência no mesmo grupo anunciante.",
+  "desafio": null,
+  "solucao": null,
+  "frames": [],
+  "variacoes": [],
+  "resultados": [],
+  "creditos": {
+    "insula": [],
+    "begen": [],
+    "agencia": [],
+    "cliente": [
+      "Unilever"
+    ]
+  }
+}

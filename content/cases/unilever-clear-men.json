@@ -1,0 +1,34 @@
+{
+  "slug": "unilever-clear-men",
+  "ordem": 2,
+  "origem": "insula",
+  "marca": "Unilever",
+  "produto": "Clear Men",
+  "campanha": "Clear Men com Vini Jr.",
+  "agencia": null,
+  "ano": 2026,
+  "setor": "cuidados pessoais",
+  "tipo": null,
+  "entrega": [
+    "filme",
+    "desdobramento"
+  ],
+  "youtubeId": "DWOG4plvsco",
+  "destaque": true,
+  "confidencial": false,
+  "privado": false,
+  "resumo": "Um filme, várias versões e formatos.",
+  "desafio": null,
+  "solucao": "Entregue em corte de diretor, versões para YouTube e TV, adaptações e upscales.",
+  "frames": [],
+  "variacoes": [],
+  "resultados": [],
+  "creditos": {
+    "insula": [],
+    "begen": [],
+    "agencia": [],
+    "cliente": [
+      "Unilever"
+    ]
+  }
+}
