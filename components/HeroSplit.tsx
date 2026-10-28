@@ -2,11 +2,35 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { setHeroVariant, track } from "@/lib/analytics";
 import { getDict } from "@/lib/dict";
 import { useEffect, useRef, useState } from "react";
 
 type Rect = { x: number; y: number; w: number; h: number };
-type Media = { image: string; focus?: string; loop?: { mp4: string; webm: string; poster: string } };
+/** Uma versão do hero: imagem (ou loop) e o ponto de recorte. As versões são sorteadas por visitante. */
+export type HeroVariant = { id: string; image: string; focus?: string; loop?: { mp4: string; webm: string; poster: string } | null; peso?: number };
+
+const STORAGE_KEY = "bf-hero";
+
+/** Escolhe a versão do hero: ?hero=<id> na URL (para conferir cada uma), a já sorteada para este visitante ou um novo sorteio por peso. */
+function pickVariant(variants: HeroVariant[]): HeroVariant {
+  const byId = (id: string | null) => variants.find((v) => v.id === id);
+  const forced = byId(new URLSearchParams(window.location.search).get("hero"));
+  if (forced) return forced;
+  let saved: string | null = null;
+  try {
+    saved = window.localStorage.getItem(STORAGE_KEY);
+  } catch {}
+  const kept = byId(saved);
+  if (kept) return kept;
+  const total = variants.reduce((n, v) => n + (v.peso ?? 1), 0);
+  let r = Math.random() * total;
+  const chosen = variants.find((v) => (r -= v.peso ?? 1) < 0) ?? variants[0];
+  try {
+    window.localStorage.setItem(STORAGE_KEY, chosen.id);
+  } catch {}
+  return chosen;
+}
 
 const TILE_KEYS = ["master", "vertical", "square", "banner"] as const;
 
@@ -56,7 +80,7 @@ function layout(W: number, ah: number): Rect[] {
 const ease = (t: number) => 1 - Math.pow(1 - t, 3);
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 
-export default function HeroSplit({ lang, media }: { lang: string; media: Media }) {
+export default function HeroSplit({ lang, variants }: { lang: string; variants: HeroVariant[] }) {
   const t = getDict(lang);
   const section = useRef<HTMLElement>(null);
   const stage = useRef<HTMLDivElement>(null);
@@ -67,7 +91,16 @@ export default function HeroSplit({ lang, media }: { lang: string; media: Media 
   const [mobile, setMobile] = useState(false);
   const [reduced, setReduced] = useState(false);
   const [paused, setPaused] = useState(false);
-  const hasLoop = !!(media.loop && (media.loop.mp4 || media.loop.webm));
+  // Sorteada só no navegador; até lá o palco fica no fundo escuro, sem trocar de imagem na frente de quem vê.
+  const [media, setMedia] = useState<HeroVariant | null>(null);
+  const hasLoop = !!(media?.loop && (media.loop.mp4 || media.loop.webm));
+
+  useEffect(() => {
+    const v = pickVariant(variants);
+    setMedia(v);
+    setHeroVariant(v.id);
+    track("hero_variante", { variante: v.id });
+  }, [variants]);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -184,7 +217,7 @@ export default function HeroSplit({ lang, media }: { lang: string; media: Media 
             style={{ width: "100%", height: "100%", zIndex: i === 0 ? 2 : 1, opacity: i === 0 ? 1 : 0 }}
             aria-hidden={i > 0}
           >
-            {hasLoop ? (
+            {!media ? null : hasLoop ? (
               <video
                 ref={(el) => {
                   videos.current[i] = el;
@@ -231,11 +264,19 @@ export default function HeroSplit({ lang, media }: { lang: string; media: Media 
             <h1 className="display max-w-[14ch] text-[clamp(44px,8vw,112px)]">{t.hero.title}</h1>
             <p className="lede mt-6">{t.hero.intro}</p>
             <div className="mt-9 flex flex-wrap items-center gap-3">
-              <Link href={`/${lang}/cases`} className="btn btn-accent">
+              <Link
+                href={`/${lang}/cases`}
+                className="btn btn-accent"
+                onClick={() => media && track("hero_clique", { variante: media.id, destino: "cases" })}
+              >
                 {t.hero.seeCases}
                 <span aria-hidden>→</span>
               </Link>
-              <Link href={`/${lang}/como-funciona`} className="btn btn-ghost">
+              <Link
+                href={`/${lang}/como-funciona`}
+                className="btn btn-ghost"
+                onClick={() => media && track("hero_clique", { variante: media.id, destino: "como-funciona" })}
+              >
                 {t.hero.how}
               </Link>
             </div>

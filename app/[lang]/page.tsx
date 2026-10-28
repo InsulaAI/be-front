@@ -30,9 +30,14 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   const t = getDict(lang);
   const h = t.home;
   const destaques = listedCases(lang).filter((c) => c.destaque).slice(0, 4);
-  const hero = getCase(site.heroCase, lang);
   const kv = getCase(site.keyVisualCase, lang);
-  const heroImage = site.heroImagem || (hero?.youtubeId ? ytThumb(hero.youtubeId) : "");
+  const heroVariants = site.heroVariantes.map((v) => ({
+    id: v.id,
+    image: v.imagem ?? (v.youtubeId ? ytThumb(v.youtubeId) : ""),
+    focus: v.foco,
+    loop: v.loop,
+    peso: v.peso,
+  }));
   // Exemplo real junto do bloco do key visual: o primeiro case com o mosaico do desdobramento
   // (filme da Insula mais peças da Begen) ou, sem nenhum, o case da Begen.
   const cases = listedCases(lang);
@@ -46,7 +51,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
     <>
       <HeroSplit
         lang={lang}
-        media={{ image: heroImage, focus: site.heroFoco, loop: site.heroLoop }}
+        variants={heroVariants}
       />
 
       {/* 2. Método */}
@@ -88,7 +93,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             {h.kvLede}
           </SectionHead>
           <Reveal>
-            <KeyVisual lang={lang} image={site.heroImagem && kv.slug === hero?.slug ? site.heroImagem : ytThumb(kv.youtubeId)} focus={site.heroFoco} />
+            <KeyVisual lang={lang} image={site.keyVisualImagem || ytThumb(kv.youtubeId)} focus={site.keyVisualFoco} />
           </Reveal>
           {begenCase && (
             <Reveal className="mt-10">

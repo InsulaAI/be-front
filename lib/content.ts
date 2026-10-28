@@ -151,12 +151,19 @@ export function numeros(lang: Locale = "pt"): Numero[] {
 
 export type Empresa = { nome: string; site: string; parte: string; texto: string };
 type Site = {
-  heroCase: string;
-  /** Frame próprio para o hero e o key visual (ex.: /media/hero/kfc.webp). Vazio: usa a capa do YouTube do heroCase. */
-  heroImagem: string;
-  /** object-position do frame nos recortes (hero e key visual), para o rosto não sair do quadro */
-  heroFoco: string;
-  heroLoop: { mp4: string; webm: string; poster: string };
+  heroVariantes: {
+    id: string;
+    tema: string;
+    imagem: string | null;
+    /** Sem imagem própria, usa a capa do YouTube deste filme. */
+    youtubeId?: string;
+    /** object-position do frame nos recortes, para o rosto ou o produto não sair do quadro. */
+    foco: string;
+    loop: { mp4: string; webm: string; poster: string } | null;
+    peso: number;
+  }[];
+  keyVisualImagem: string;
+  keyVisualFoco: string;
   keyVisualCase: string;
   email: string;
   whatsapp: string;

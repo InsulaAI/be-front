@@ -1,13 +1,38 @@
 {
   "_leia": "Contatos e textos fixos. Campo vazio esconde o item no site (WhatsApp, agenda, e-mail, redes, links das empresas).",
-  "heroCase": "kfc",
-  "heroImagem": "/media/hero/kfc-coronel.webp",
-  "heroFoco": "53% 30%",
-  "heroLoop": {
-    "mp4": "",
-    "webm": "",
-    "poster": ""
-  },
+  "_heroVariantes": "Versões do hero, sorteadas por visitante (peso relativo). Para ver uma versão específica: /pt?hero=<id>. O GA4 recebe o evento hero_variante e a propriedade de usuário hero_variante.",
+  "heroVariantes": [
+    {
+      "id": "coronel",
+      "tema": "KFC, Coronel Sanders: emoção e humor",
+      "imagem": "/media/hero/kfc-coronel.webp",
+      "foco": "53% 30%",
+      "loop": null,
+      "peso": 1
+    },
+    {
+      "id": "maturatta",
+      "tema": "Maturatta, loop animado: apetite",
+      "imagem": "/media/hero/maturatta-loop-poster.webp",
+      "foco": "50% 42%",
+      "loop": {
+        "mp4": "/media/hero/maturatta-loop.mp4",
+        "webm": "/media/hero/maturatta-loop.webm",
+        "poster": "/media/hero/maturatta-loop-poster.webp"
+      },
+      "peso": 1
+    },
+    {
+      "id": "clear",
+      "tema": "Clear Men com Vini Jr.: energia e esporte",
+      "imagem": "/media/hero/clear-vini.webp",
+      "foco": "35% 35%",
+      "loop": null,
+      "peso": 1
+    }
+  ],
+  "keyVisualImagem": "/media/hero/kfc-coronel.webp",
+  "keyVisualFoco": "53% 30%",
   "keyVisualCase": "kfc",
   "email": "",
   "whatsapp": "",
