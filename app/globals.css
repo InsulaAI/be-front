@@ -15,6 +15,7 @@
   --text-3: #8c8b86;       /* 5,9:1, AA em texto corrido */
   --accent: #fa4d23;       /* o ponto do logo. 6,1:1 sobre o preto */
   --accent-ink: #000000;   /* texto sobre o acento */
+  --badge: #ffffff;        /* fundo do selo Google Partner, que não pode ser recolorido */
   --maxw: 1240px;
   --radius: 14px;
 }
@@ -30,6 +31,7 @@
   --color-text-3: var(--text-3);
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
+  --color-badge: var(--badge);
   --font-display: "Mulish Variable", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Archivo Variable", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
