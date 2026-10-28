@@ -79,6 +79,28 @@ function layout(W: number, ah: number): Rect[] {
 }
 
 const ease = (t: number) => 1 - Math.pow(1 - t, 3);
+
+/** "50% 42%" → [0,5, 0,42]. Ponto de recorte do object-position, reaproveitado no desenho dos formatos. */
+function parseFocus(f?: string): [number, number] {
+  const [x, y] = (f ?? "50% 50%").split(/\s+/).map((v) => parseFloat(v) / 100);
+  return [Number.isFinite(x) ? x : 0.5, Number.isFinite(y) ? y : 0.5];
+}
+
+/** Desenha o quadro atual do vídeo no canvas como object-fit: cover, no mesmo ponto de recorte. */
+function drawCover(video: HTMLVideoElement, canvas: HTMLCanvasElement, [fx, fy]: [number, number]) {
+  const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+  const cw = Math.round(canvas.clientWidth * dpr);
+  const ch = Math.round(canvas.clientHeight * dpr);
+  if (!cw || !ch || !video.videoWidth) return;
+  if (canvas.width !== cw) canvas.width = cw;
+  if (canvas.height !== ch) canvas.height = ch;
+  const vw = video.videoWidth;
+  const vh = video.videoHeight;
+  const scale = Math.max(cw / vw, ch / vh);
+  const sw = cw / scale;
+  const sh = ch / scale;
+  canvas.getContext("2d")?.drawImage(video, (vw - sw) * fx, (vh - sh) * fy, sw, sh, 0, 0, cw, ch);
+}
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 
 export default function HeroSplit({ lang, variants }: { lang: string; variants: HeroVariant[] }) {
@@ -88,7 +110,10 @@ export default function HeroSplit({ lang, variants }: { lang: string; variants: 
   const tiles = useRef<(HTMLDivElement | null)[]>([]);
   const copy = useRef<HTMLDivElement>(null);
   const after = useRef<HTMLDivElement>(null);
-  const videos = useRef<(HTMLVideoElement | null)[]>([]);
+  const video = useRef<HTMLVideoElement>(null);
+  const canvases = useRef<(HTMLCanvasElement | null)[]>([]);
+  // Quanto o quadro já se dividiu (0 a 1). Os formatos só são redesenhados depois que aparecem.
+  const split = useRef(0);
   const [mobile, setMobile] = useState(false);
   const [reduced, setReduced] = useState(false);
   const [paused, setPaused] = useState(false);
@@ -147,6 +172,7 @@ export default function HeroSplit({ lang, variants }: { lang: string; variants: 
       const p = reduced || span <= 0 ? 0 : clamp01(-r.top / span);
       // 0 → 0,15: quadro inteiro parado. 0,15 → 0,85: divide. Depois: segura o resultado.
       const t = ease(clamp01((p - 0.15) / 0.7));
+      split.current = t;
       tiles.current.forEach((el, i) => {
         if (!el) return;
         const e = ends[i];
@@ -196,12 +222,26 @@ export default function HeroSplit({ lang, variants }: { lang: string; variants: 
   }, [reduced]);
 
   useEffect(() => {
-    videos.current.forEach((v) => {
-      if (!v) return;
-      if (paused) v.pause();
-      else v.play().catch(() => {});
-    });
-  }, [paused]);
+    const v = video.current;
+    if (!v) return;
+    if (paused) v.pause();
+    else v.play().catch(() => {});
+  }, [paused, media]);
+
+  // Um vídeo só é baixado: os formatos derivados copiam o quadro dele num canvas, sempre em sincronia.
+  useEffect(() => {
+    if (!hasLoop) return;
+    const focus = parseFocus(media?.focus);
+    let raf = 0;
+    const draw = () => {
+      raf = requestAnimationFrame(draw);
+      const v = video.current;
+      if (!v || v.readyState < 2 || split.current < 0.01) return;
+      canvases.current.forEach((c) => c && drawCover(v, c, focus));
+    };
+    raf = requestAnimationFrame(draw);
+    return () => cancelAnimationFrame(raf);
+  }, [hasLoop, media]);
 
   const labels = mobile ? t.hero.tilesMobile : t.hero.tiles;
 
@@ -218,18 +258,23 @@ export default function HeroSplit({ lang, variants }: { lang: string; variants: 
             style={{ width: "100%", height: "100%", zIndex: i === 0 ? 2 : 1, opacity: i === 0 ? 1 : 0 }}
             aria-hidden={i > 0}
           >
-            {!media ? null : hasLoop ? (
-              <video
+            {!media ? null : hasLoop && i > 0 ? (
+              <canvas
                 ref={(el) => {
-                  videos.current[i] = el;
+                  canvases.current[i] = el;
                 }}
+                className="h-full w-full"
+              />
+            ) : hasLoop ? (
+              <video
+                ref={video}
                 className="h-full w-full object-cover"
                 style={{ objectPosition: media.focus }}
                 autoPlay={!reduced}
                 muted
                 loop
                 playsInline
-                preload={i === 0 ? "auto" : "metadata"}
+                preload="auto"
                 poster={media.loop!.poster || media.image}
               >
                 {media.loop!.webm && <source src={media.loop!.webm} type="video/webm" />}

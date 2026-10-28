@@ -4,10 +4,14 @@
   "heroVariantes": [
     {
       "id": "coronel",
-      "tema": "KFC, Coronel Sanders feliz olhando a TV (print do filme): humor e afeto",
-      "imagem": "/media/hero/kfc-coronel-tv.webp",
-      "foco": "63% 26%",
-      "loop": null,
+      "tema": "KFC, o filme inteiro em loop (sem a cartela de preço): humor e afeto",
+      "imagem": "/media/hero/kfc-filme-poster.webp",
+      "foco": "55% 40%",
+      "loop": {
+        "mp4": "/media/hero/kfc-filme.mp4",
+        "webm": "/media/hero/kfc-filme.webm",
+        "poster": "/media/hero/kfc-filme-poster.webp"
+      },
       "peso": 1
     },
     {
