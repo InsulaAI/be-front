@@ -75,7 +75,11 @@ export default function KeyVisual({ lang, image, focus = "50% 50%" }: { lang: st
             <span>1</span>
             <span>{MAX}</span>
           </div>
-          <p className="mt-6 text-sm text-text-3">{t.note}</p>
+          <p className="mt-6 text-text-2">
+            {t.beyond[0]} <b className="font-semibold text-accent">{t.beyond[1]}</b>
+            {t.beyond[2]}
+          </p>
+          <p className="mt-3 text-sm text-text-3">{t.note}</p>
         </div>
       </div>
 
