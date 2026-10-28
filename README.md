@@ -26,4 +26,4 @@ Sem `NEXT_PUBLIC_GA_ID`, nenhum script de métricas é carregado.
 
 ## Deploy
 
-Vercel: importar o repositório e configurar as variáveis de `.env.example`. Sem `NEXT_PUBLIC_SITE_URL`, o site usa o endereço genérico da Vercel (`*.vercel.app`); preencher quando houver domínio próprio.
+Vercel: importar o repositório e configurar as variáveis de `.env.example`. O endereço oficial é https://be-front.ai (definido em `lib/i18n.ts`).

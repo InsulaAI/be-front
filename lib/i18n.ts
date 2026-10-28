@@ -7,10 +7,15 @@ export function isLocale(v: string): v is Locale {
   return (LOCALES as readonly string[]).includes(v);
 }
 
-// Domínio próprio quando houver; até lá, o endereço genérico que a Vercel dá ao projeto.
+// Endereço oficial: be-front.ai em produção. As versões de teste da Vercel usam o próprio endereço
+// e o ambiente local usa localhost. NEXT_PUBLIC_SITE_URL, se definida, vale sobre tudo.
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000");
+  (process.env.VERCEL_ENV === "production"
+    ? "https://be-front.ai"
+    : process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000");
 
 export const NAV = [
   { href: "/filmes", key: "filmes" },
