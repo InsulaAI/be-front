@@ -22,8 +22,9 @@ function pickVariant(variants: HeroVariant[]): HeroVariant {
   try {
     saved = window.localStorage.getItem(STORAGE_KEY);
   } catch {}
+  // Quem já sorteou uma versão fica nela, a menos que ela tenha saído do sorteio (peso 0).
   const kept = byId(saved);
-  if (kept) return kept;
+  if (kept && (kept.peso ?? 1) > 0) return kept;
   const total = variants.reduce((n, v) => n + (v.peso ?? 1), 0);
   let r = Math.random() * total;
   const chosen = variants.find((v) => (r -= v.peso ?? 1) < 0) ?? variants[0];

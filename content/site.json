@@ -1,6 +1,6 @@
 {
   "_leia": "Contatos e textos fixos. Campo vazio esconde o item no site (WhatsApp, agenda, e-mail, redes, links das empresas).",
-  "_heroVariantes": "Versões do hero, sorteadas por visitante (peso relativo). Para ver uma versão específica: /pt?hero=<id>. O GA4 recebe o evento hero_variante e a propriedade de usuário hero_variante.",
+  "_heroVariantes": "Versões do hero, sorteadas por visitante (peso relativo; peso 0 tira a versão do sorteio, mas ?hero=<id> ainda a mostra). Para ver uma versão específica: /pt?hero=<id>. O GA4 recebe o evento hero_variante e a propriedade de usuário hero_variante.",
   "heroVariantes": [
     {
       "id": "coronel",
@@ -24,7 +24,7 @@
         "webm": "/media/hero/maturatta-loop.webm",
         "poster": "/media/hero/maturatta-loop-poster.webp"
       },
-      "peso": 1
+      "peso": 0
     },
     {
       "id": "clear",
@@ -32,7 +32,7 @@
       "imagem": "/media/hero/clear-vini.webp",
       "foco": "35% 35%",
       "loop": null,
-      "peso": 1
+      "peso": 0
     }
   ],
   "keyVisualImagem": "/media/hero/kfc-coronel.webp",
