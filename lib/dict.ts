@@ -7,6 +7,7 @@ const pt = {
   htmlLang: "pt-BR",
   ogLocale: "pt_BR",
   powered: "be-front, powered by Insula e Begen",
+  googlePartner: "Official Google Partner",
   nav: { filmes: "Filmes", cases: "Cases", comoFunciona: "Como funciona", insulaBegen: "Insula e Begen", contato: "Contato" },
   header: {
     skip: "Pular para o conteúdo",
@@ -211,6 +212,7 @@ const en: Dict = {
   htmlLang: "en",
   ogLocale: "en_US",
   powered: "be-front, powered by Insula and Begen",
+  googlePartner: "Official Google Partner",
   nav: { filmes: "Films", cases: "Cases", comoFunciona: "How it works", insulaBegen: "Insula and Begen", contato: "Contact" },
   header: {
     skip: "Skip to content",

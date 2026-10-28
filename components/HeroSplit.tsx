@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { setHeroVariant, track } from "@/lib/analytics";
+import GooglePartner from "./GooglePartner";
 import { getDict } from "@/lib/dict";
 import { useEffect, useRef, useState } from "react";
 
@@ -280,6 +281,7 @@ export default function HeroSplit({ lang, variants }: { lang: string; variants: 
                 {t.hero.how}
               </Link>
             </div>
+            <GooglePartner label={t.googlePartner} className="mt-9" />
           </div>
         </div>
 

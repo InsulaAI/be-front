@@ -3,6 +3,7 @@ import { site, whatsappUrl } from "@/lib/content";
 import { getDict } from "@/lib/dict";
 import { NAV, type Locale } from "@/lib/i18n";
 import LangSwitchHere from "./LangSwitchHere";
+import GooglePartner from "./GooglePartner";
 import Logo from "./Logo";
 import { WhatsAppLink } from "./Track";
 
@@ -15,6 +16,7 @@ export default function Footer({ lang }: { lang: Locale }) {
         <div>
           <Logo className="h-7 w-auto text-text" />
           <p className="mt-5 max-w-[34ch] text-text-2">{t.footer.tagline}</p>
+          <GooglePartner label={t.googlePartner} className="mt-8" />
         </div>
 
         <nav aria-label={t.footer.nav} className="grid content-start gap-3">
