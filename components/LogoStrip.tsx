@@ -1,9 +1,9 @@
 import type { Cliente } from "@/lib/content";
 
-/** Faixa monocromática: logos em silhueta na cor do texto secundário. */
+/** Faixa monocromática: logos em silhueta na cor do texto secundário, em grade (5 por linha no desktop). */
 export default function LogoStrip({ clientes }: { clientes: Cliente[] }) {
   return (
-    <ul className="flex flex-wrap items-center justify-center gap-x-14 gap-y-8 md:justify-between">
+    <ul className="grid grid-cols-2 items-center justify-items-center gap-x-8 gap-y-10 sm:grid-cols-3 md:grid-cols-5 md:gap-y-12">
       {clientes.map((c) => (
         <li key={c.slug} className="flex h-12 items-center text-text-2">
           <svg
